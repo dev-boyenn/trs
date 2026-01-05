@@ -1,23 +1,29 @@
 # TRS
 
-Minimal Rust app that launches a native Twitch stream player without a webview.
+Minimal Python app that launches a native Twitch stream player without a webview.
 
 ## Prerequisites
 
-- Rust (stable) installed via [rustup](https://rustup.rs/)
-- [streamlink](https://streamlink.github.io/) available on your PATH
+- Python 3.10+
 - [GStreamer](https://gstreamer.freedesktop.org/) runtime installed
+- Python packages: `streamlink`, `PyGObject`
+
+## Install
+
+```sh
+python -m pip install -r requirements.txt
+```
 
 ## Run
 
 ```sh
-cargo run -- <twitch_channel_one> <twitch_channel_two>
+python main.py <twitch_channel_one> <twitch_channel_two>
 ```
 
 Example:
 
 ```sh
-cargo run -- ninja shroud
+python main.py ninja shroud
 ```
 
 The player switches between the two streams every 10 seconds.
