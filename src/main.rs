@@ -1,57 +1,34 @@
 use std::env;
-use wry::application::event::{Event, WindowEvent};
-use wry::application::event_loop::{ControlFlow, EventLoop};
-use wry::application::window::WindowBuilder;
-use wry::webview::WebViewBuilder;
+use std::process::{Command, Stdio};
 
-fn main() -> wry::Result<()> {
-    let channel = env::args().nth(1).unwrap_or_else(|| "twitch".to_string());
-    let html = format!(
-        r#"<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-html, body, iframe {{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  overflow: hidden;
-}}
-</style>
-</head>
-<body>
-<iframe
-  src="https://player.twitch.tv/?channel={channel}&parent=localhost&autoplay=true&muted=false&controls=false"
-  frameborder="0"
-  scrolling="no"
-  allow="autoplay; fullscreen"
-  allowfullscreen
-></iframe>
-</body>
-</html>"#
-    );
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let channel = env::args().nth(1).ok_or("missing twitch channel name")?;
+    let stream_url = format!("https://twitch.tv/{channel}");
 
-    let event_loop = EventLoop::new();
-    let window = WindowBuilder::new()
-        .with_title("TRS")
-        .build(&event_loop)
-        .expect("failed to build window");
+    let output = Command::new("streamlink")
+        .arg("--stream-url")
+        .arg(stream_url)
+        .arg("best")
+        .stdout(Stdio::piped())
+        .stderr(Stdio::inherit())
+        .output()?;
 
-    let _webview = WebViewBuilder::new(window)?.with_html(&html)?.build()?;
+    if !output.status.success() {
+        return Err("streamlink failed to resolve stream URL".into());
+    }
 
-    event_loop.run(move |event, _, control_flow| {
-        *control_flow = ControlFlow::Wait;
+    let hls_url = String::from_utf8(output.stdout)?.trim().to_string();
+    if hls_url.is_empty() {
+        return Err("streamlink returned an empty stream URL".into());
+    }
 
-        if let Event::WindowEvent {
-            event: WindowEvent::CloseRequested,
-            ..
-        } = event
-        {
-            *control_flow = ControlFlow::Exit;
-        }
-    });
+    let status = Command::new("mpv")
+        .arg(hls_url)
+        .status()?;
+
+    if !status.success() {
+        return Err("mpv failed to play stream".into());
+    }
+
+    Ok(())
 }
