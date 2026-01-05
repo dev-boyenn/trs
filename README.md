@@ -11,11 +11,13 @@ Minimal Rust app that launches a native Twitch stream player without a webview.
 ## Run
 
 ```sh
-cargo run -- <twitch_channel>
+cargo run -- <twitch_channel_one> <twitch_channel_two>
 ```
 
 Example:
 
 ```sh
-cargo run -- ninja
+cargo run -- ninja shroud
 ```
+
+The player switches between the two streams every 10 seconds.
