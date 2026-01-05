@@ -1,0 +1,3 @@
+streamlink
+PySide6
+PySide6-Addons
