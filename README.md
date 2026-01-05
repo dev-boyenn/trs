@@ -6,7 +6,7 @@ Minimal Rust app that launches a native Twitch stream player without a webview.
 
 - Rust (stable) installed via [rustup](https://rustup.rs/)
 - [streamlink](https://streamlink.github.io/) available on your PATH
-- [mpv](https://mpv.io/) available on your PATH
+- [GStreamer](https://gstreamer.freedesktop.org/) runtime installed
 
 ## Run
 

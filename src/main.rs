@@ -1,7 +1,13 @@
 use std::env;
 use std::process::{Command, Stdio};
 
+use glib::MainLoop;
+use gstreamer as gst;
+use gst::prelude::*;
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    gst::init()?;
+
     let channel = env::args().nth(1).ok_or("missing twitch channel name")?;
     let stream_url = format!("https://twitch.tv/{channel}");
 
@@ -22,13 +28,34 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("streamlink returned an empty stream URL".into());
     }
 
-    let status = Command::new("mpv")
-        .arg(hls_url)
-        .status()?;
+    let playbin = gst::ElementFactory::make("playbin")
+        .build()
+        .map_err(|_| "failed to create gstreamer playbin")?;
+    playbin.set_property("uri", hls_url);
 
-    if !status.success() {
-        return Err("mpv failed to play stream".into());
-    }
+    let bus = playbin.bus().ok_or("missing gstreamer bus")?;
+    playbin.set_state(gst::State::Playing)?;
+
+    let main_loop = MainLoop::new(None, false);
+    let loop_clone = main_loop.clone();
+
+    bus.add_watch(move |_, msg| {
+        use gst::MessageView;
+
+        match msg.view() {
+            MessageView::Eos(..) => loop_clone.quit(),
+            MessageView::Error(err) => {
+                eprintln!("gstreamer error: {}", err.error());
+                loop_clone.quit();
+            }
+            _ => {}
+        }
+
+        glib::ControlFlow::Continue
+    })?;
+
+    main_loop.run();
+    playbin.set_state(gst::State::Null)?;
 
     Ok(())
 }
