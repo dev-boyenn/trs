@@ -4,5 +4,10 @@
     "mobiusspeedruns",
     "justaltoid",
     "drip120"
-  ]
+  ],
+  "settings": {
+    "paceman_mode": true,
+    "include_hidden": false,
+    "paceman_fallback": true
+  }
 }
