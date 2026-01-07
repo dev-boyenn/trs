@@ -17,15 +17,19 @@ python -m pip install -r requirements.txt
 ## Run
 
 ```sh
-$env:TWITCH_OAUTH_TOKEN="3uetne2yjknpr5o64g0os18h2tjtf9"
-python main.py <twitch_channel> [twitch_channel ...]
+$env:TWITCH_OAUTH_TOKEN="your_oauth_token"
+python main.py
 ```
 
-Example:
+Linux/macOS:
 
 ```sh
-$env:TWITCH_OAUTH_TOKEN="3uetne2yjknpr5o64g0os18h2tjtf9"
-python main.py fulham beefsalad couriway edcrspeedruns
+export TWITCH_OAUTH_TOKEN="your_oauth_token"
+python main.py
 ```
+
+The app starts with the player window plus a control panel. Use the control
+panel to add/remove streams and toggle Paceman settings. Streams and settings
+are saved in `save.json`, so the next launch restores them.
 
 The player shows all streams side by side (audio is enabled for the first one).
