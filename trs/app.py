@@ -36,7 +36,7 @@ def main() -> int:
             focused=focused,
         )
 
-    def on_settings_changed(updated: dict[str, bool]) -> None:
+    def on_settings_changed(updated: dict[str, object]) -> None:
         nonlocal current_settings
         current_settings = dict(updated)
         save_state(current_streams, current_settings)

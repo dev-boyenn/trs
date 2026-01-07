@@ -22,6 +22,8 @@ class PlayerWindow(QtWidgets.QMainWindow):
         self._placeholder: QtWidgets.QLabel | None = None
         self._last_urls: list[str] = []
         self._last_focused = False
+        self._last_grid_rows = 0
+        self._last_grid_cols = 0
 
     def set_urls(self, urls: list[str], focused: bool = False) -> None:
         if urls == self._last_urls and focused == self._last_focused:
@@ -52,28 +54,28 @@ class PlayerWindow(QtWidgets.QMainWindow):
         for entry in old_entries.values():
             self._release_entry(entry)
 
-        self._grid.setRowStretch(0, 0)
-        self._grid.setRowStretch(1, 0)
         self._clear_layout(ordered_entries)
         if focused and len(ordered_entries) > 1:
-            self._layout_focused(ordered_entries)
+            rows, cols = self._layout_focused(ordered_entries)
         else:
             columns = max(1, math.ceil(math.sqrt(len(ordered_entries))))
             for index, entry in enumerate(ordered_entries):
                 row = index // columns
                 col = index % columns
                 self._add_player_widget(row, col, entry)
+            rows = math.ceil(len(ordered_entries) / columns)
+            cols = columns
+        self._apply_grid_stretch(rows, cols, focused)
         self._apply_audio_focus(ordered_entries)
 
-    def _layout_focused(self, entries: list["_PlayerEntry"]) -> None:
+    def _layout_focused(self, entries: list["_PlayerEntry"]) -> tuple[int, int]:
         top_entry = entries[0]
         bottom_entries = entries[1:]
         columns = max(1, len(bottom_entries))
-        self._grid.setRowStretch(0, 7)
-        self._grid.setRowStretch(1, 3)
         self._add_player_widget(0, 0, top_entry, col_span=columns)
         for index, entry in enumerate(bottom_entries):
             self._add_player_widget(1, index, entry)
+        return 2, columns
 
     def _add_player_widget(
         self, row: int, col: int, entry: "_PlayerEntry", col_span: int = 1
@@ -89,6 +91,7 @@ class PlayerWindow(QtWidgets.QMainWindow):
             self._placeholder = None
 
         self._entries.clear()
+        self._apply_grid_stretch(0, 0, False)
 
     def shutdown(self) -> None:
         self._clear_players()
@@ -107,6 +110,25 @@ class PlayerWindow(QtWidgets.QMainWindow):
     def _apply_audio_focus(self, entries: list["_PlayerEntry"]) -> None:
         for index, entry in enumerate(entries):
             entry.audio_output.setVolume(1.0 if index == 0 else 0.0)
+
+    def _apply_grid_stretch(self, rows: int, cols: int, focused: bool) -> None:
+        for row in range(rows, self._last_grid_rows):
+            self._grid.setRowStretch(row, 0)
+        for col in range(cols, self._last_grid_cols):
+            self._grid.setColumnStretch(col, 0)
+        if focused and rows >= 2:
+            self._grid.setRowStretch(0, 7)
+            self._grid.setRowStretch(1, 3)
+            for row in range(2, rows):
+                self._grid.setRowStretch(row, 1)
+        else:
+            for row in range(rows):
+                self._grid.setRowStretch(row, 1)
+        for col in range(cols):
+            self._grid.setColumnStretch(col, 1)
+        self._last_grid_rows = rows
+        self._last_grid_cols = cols
+
 
     def _create_entry(self, url: str) -> "_PlayerEntry":
         video_widget = QtMultimediaWidgets.QVideoWidget(self)

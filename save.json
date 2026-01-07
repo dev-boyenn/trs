@@ -8,6 +8,28 @@
   "settings": {
     "paceman_mode": true,
     "include_hidden": false,
-    "paceman_fallback": true
+    "paceman_fallback": true,
+    "paceman_hide_offline": false,
+    "pace_sort_enabled": true,
+    "pace_autofocus_enabled": true,
+    "pace_autofocus_threshold": 0.7,
+    "pace_good_splits": {
+      "NETHER": 90.0,
+      "S1": 120.0,
+      "S2": 240.0,
+      "BLIND": 300.0,
+      "STRONGHOLD": 360.0,
+      "END ENTER": 400.0,
+      "FINISH": 600.0
+    },
+    "pace_progression_bonus": {
+      "NETHER": -0.2,
+      "S1": 0.2,
+      "S2": 0.6,
+      "BLIND": 0.8,
+      "STRONGHOLD": 0.9,
+      "END ENTER": 0.95,
+      "FINISH": 1.0
+    }
   }
 }
