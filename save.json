@@ -73,6 +73,7 @@
     "manual_grid_columns": 3,
     "manual_grid_rows": 3,
     "overlay_enabled": true,
+    "focus_bell_enabled": false,
     "pace_sort_enabled": true,
     "pace_autofocus_enabled": true,
     "pace_autofocus_threshold": 3.0,

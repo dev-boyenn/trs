@@ -11692,3 +11692,779 @@
 2026-02-15 15:57:27,325 event=player_window.set_streams.internal duration_ms=0.12 streams=5 focused=False created=0 reused=5 released=0
 2026-02-15 15:57:27,326 event=player_window.set_streams duration_ms=0.18 count=5 focused=False request_id=2 manual_mode=True
 2026-02-15 15:57:33,724 event=control_panel.refresh_list duration_ms=16.20
+2026-02-15 15:58:42,658 event=perf_logger_started path=perf.log
+2026-02-15 15:58:42,788 event=stream_resolver.cache_miss channel=aquacordemc
+2026-02-15 15:58:43,639 event=stream_resolver.streams duration_ms=851.30 channel=aquacordemc
+2026-02-15 15:58:43,640 event=stream_resolver.best_missing channel=aquacordemc
+2026-02-15 15:58:43,640 event=stream_resolver.resolve_hls_url duration_ms=851.58 channel=aquacordemc
+2026-02-15 15:58:43,640 event=stream_resolver.resolve_failed channel=aquacordemc error=RuntimeError
+2026-02-15 15:58:43,640 event=stream_resolver.cache_miss channel=topimpapig
+2026-02-15 15:58:43,877 event=stream_resolver.streams duration_ms=237.53 channel=topimpapig
+2026-02-15 15:58:43,877 event=stream_resolver.best_missing channel=topimpapig
+2026-02-15 15:58:43,877 event=stream_resolver.resolve_hls_url duration_ms=237.74 channel=topimpapig
+2026-02-15 15:58:43,878 event=stream_resolver.resolve_failed channel=topimpapig error=RuntimeError
+2026-02-15 15:58:43,878 event=stream_resolver.cache_miss channel=wethr_
+2026-02-15 15:58:44,191 event=stream_resolver.streams duration_ms=313.22 channel=wethr_
+2026-02-15 15:58:44,191 event=stream_resolver.best_missing channel=wethr_
+2026-02-15 15:58:44,191 event=stream_resolver.resolve_hls_url duration_ms=313.42 channel=wethr_
+2026-02-15 15:58:44,191 event=stream_resolver.resolve_failed channel=wethr_ error=RuntimeError
+2026-02-15 15:58:44,191 event=stream_resolver.cache_miss channel=cornflakesmcsr
+2026-02-15 15:58:45,225 event=stream_resolver.streams duration_ms=1034.03 channel=cornflakesmcsr
+2026-02-15 15:58:45,226 event=stream_resolver.to_url duration_ms=0.34 channel=cornflakesmcsr
+2026-02-15 15:58:45,226 event=stream_resolver.resolve_hls_url duration_ms=1034.59 channel=cornflakesmcsr
+2026-02-15 15:58:45,226 event=stream_resolver.cache_miss channel=jackowackio
+2026-02-15 15:58:45,509 event=stream_resolver.streams duration_ms=282.93 channel=jackowackio
+2026-02-15 15:58:45,509 event=stream_resolver.best_missing channel=jackowackio
+2026-02-15 15:58:45,509 event=stream_resolver.resolve_hls_url duration_ms=283.13 channel=jackowackio
+2026-02-15 15:58:45,509 event=stream_resolver.resolve_failed channel=jackowackio error=RuntimeError
+2026-02-15 15:58:45,509 event=stream_resolver.cache_miss channel=jackowackoalt
+2026-02-15 15:58:45,823 event=stream_resolver.streams duration_ms=313.34 channel=jackowackoalt
+2026-02-15 15:58:45,823 event=stream_resolver.best_missing channel=jackowackoalt
+2026-02-15 15:58:45,823 event=stream_resolver.resolve_hls_url duration_ms=313.50 channel=jackowackoalt
+2026-02-15 15:58:45,823 event=stream_resolver.resolve_failed channel=jackowackoalt error=RuntimeError
+2026-02-15 15:58:45,823 event=stream_resolver.cache_miss channel=okshey
+2026-02-15 15:58:46,100 event=stream_resolver.streams duration_ms=276.79 channel=okshey
+2026-02-15 15:58:46,100 event=stream_resolver.best_missing channel=okshey
+2026-02-15 15:58:46,100 event=stream_resolver.resolve_hls_url duration_ms=276.98 channel=okshey
+2026-02-15 15:58:46,100 event=stream_resolver.resolve_failed channel=okshey error=RuntimeError
+2026-02-15 15:58:46,100 event=stream_resolver.cache_miss channel=okrzej1
+2026-02-15 15:58:46,307 event=stream_resolver.streams duration_ms=206.30 channel=okrzej1
+2026-02-15 15:58:46,307 event=stream_resolver.best_missing channel=okrzej1
+2026-02-15 15:58:46,307 event=stream_resolver.resolve_hls_url duration_ms=206.48 channel=okrzej1
+2026-02-15 15:58:46,307 event=stream_resolver.resolve_failed channel=okrzej1 error=RuntimeError
+2026-02-15 15:58:46,307 event=stream_resolver.cache_miss channel=muhammadpro5741
+2026-02-15 15:58:46,594 event=stream_resolver.streams duration_ms=287.36 channel=muhammadpro5741
+2026-02-15 15:58:46,595 event=stream_resolver.best_missing channel=muhammadpro5741
+2026-02-15 15:58:46,595 event=stream_resolver.resolve_hls_url duration_ms=287.62 channel=muhammadpro5741
+2026-02-15 15:58:46,595 event=stream_resolver.resolve_failed channel=muhammadpro5741 error=RuntimeError
+2026-02-15 15:58:46,595 event=stream_resolver.cache_miss channel=czelco
+2026-02-15 15:58:48,560 event=stream_resolver.streams duration_ms=1965.59 channel=czelco
+2026-02-15 15:58:48,561 event=stream_resolver.to_url duration_ms=0.46 channel=czelco
+2026-02-15 15:58:48,561 event=stream_resolver.resolve_hls_url duration_ms=1966.36 channel=czelco
+2026-02-15 15:58:48,561 event=stream_resolver.cache_miss channel=czelcoalt
+2026-02-15 15:58:48,858 event=stream_resolver.streams duration_ms=296.38 channel=czelcoalt
+2026-02-15 15:58:48,858 event=stream_resolver.best_missing channel=czelcoalt
+2026-02-15 15:58:48,858 event=stream_resolver.resolve_hls_url duration_ms=296.59 channel=czelcoalt
+2026-02-15 15:58:48,858 event=stream_resolver.resolve_failed channel=czelcoalt error=RuntimeError
+2026-02-15 15:58:48,858 event=stream_resolver.cache_miss channel=pjoes1
+2026-02-15 15:58:49,701 event=stream_resolver.streams duration_ms=842.56 channel=pjoes1
+2026-02-15 15:58:49,701 event=stream_resolver.to_url duration_ms=0.32 channel=pjoes1
+2026-02-15 15:58:49,701 event=stream_resolver.resolve_hls_url duration_ms=843.09 channel=pjoes1
+2026-02-15 15:58:49,701 event=stream_resolver.cache_miss channel=bbiddd
+2026-02-15 15:58:50,001 event=stream_resolver.streams duration_ms=299.28 channel=bbiddd
+2026-02-15 15:58:50,001 event=stream_resolver.best_missing channel=bbiddd
+2026-02-15 15:58:50,001 event=stream_resolver.resolve_hls_url duration_ms=299.54 channel=bbiddd
+2026-02-15 15:58:50,001 event=stream_resolver.resolve_failed channel=bbiddd error=RuntimeError
+2026-02-15 15:58:50,001 event=stream_resolver.cache_miss channel=leahmp3
+2026-02-15 15:58:50,304 event=stream_resolver.streams duration_ms=303.53 channel=leahmp3
+2026-02-15 15:58:50,305 event=stream_resolver.best_missing channel=leahmp3
+2026-02-15 15:58:50,305 event=stream_resolver.resolve_hls_url duration_ms=303.69 channel=leahmp3
+2026-02-15 15:58:50,305 event=stream_resolver.resolve_failed channel=leahmp3 error=RuntimeError
+2026-02-15 15:58:50,305 event=stream_resolver.cache_miss channel=leahhhsr
+2026-02-15 15:58:50,519 event=stream_resolver.streams duration_ms=213.90 channel=leahhhsr
+2026-02-15 15:58:50,519 event=stream_resolver.best_missing channel=leahhhsr
+2026-02-15 15:58:50,519 event=stream_resolver.resolve_hls_url duration_ms=214.11 channel=leahhhsr
+2026-02-15 15:58:50,519 event=stream_resolver.resolve_failed channel=leahhhsr error=RuntimeError
+2026-02-15 15:58:50,519 event=stream_resolver.cache_miss channel=paukll
+2026-02-15 15:58:50,797 event=stream_resolver.streams duration_ms=278.14 channel=paukll
+2026-02-15 15:58:50,798 event=stream_resolver.best_missing channel=paukll
+2026-02-15 15:58:50,798 event=stream_resolver.resolve_hls_url duration_ms=278.43 channel=paukll
+2026-02-15 15:58:50,798 event=stream_resolver.resolve_failed channel=paukll error=RuntimeError
+2026-02-15 15:58:50,798 event=stream_resolver.cache_miss channel=xx_rms_xxgamer1337
+2026-02-15 15:58:51,108 event=stream_resolver.streams duration_ms=310.13 channel=xx_rms_xxgamer1337
+2026-02-15 15:58:51,108 event=stream_resolver.best_missing channel=xx_rms_xxgamer1337
+2026-02-15 15:58:51,108 event=stream_resolver.resolve_hls_url duration_ms=310.36 channel=xx_rms_xxgamer1337
+2026-02-15 15:58:51,108 event=stream_resolver.resolve_failed channel=xx_rms_xxgamer1337 error=RuntimeError
+2026-02-15 15:58:51,108 event=stream_resolver.cache_miss channel=nacay
+2026-02-15 15:58:51,408 event=stream_resolver.streams duration_ms=299.55 channel=nacay
+2026-02-15 15:58:51,408 event=stream_resolver.best_missing channel=nacay
+2026-02-15 15:58:51,408 event=stream_resolver.resolve_hls_url duration_ms=299.74 channel=nacay
+2026-02-15 15:58:51,408 event=stream_resolver.resolve_failed channel=nacay error=RuntimeError
+2026-02-15 15:58:51,408 event=stream_resolver.cache_miss channel=dintymit
+2026-02-15 15:58:51,711 event=stream_resolver.streams duration_ms=302.85 channel=dintymit
+2026-02-15 15:58:51,712 event=stream_resolver.best_missing channel=dintymit
+2026-02-15 15:58:51,712 event=stream_resolver.resolve_hls_url duration_ms=303.11 channel=dintymit
+2026-02-15 15:58:51,712 event=stream_resolver.resolve_failed channel=dintymit error=RuntimeError
+2026-02-15 15:58:51,712 event=stream_resolver.cache_miss channel=goonlord17
+2026-02-15 15:58:52,012 event=stream_resolver.streams duration_ms=300.32 channel=goonlord17
+2026-02-15 15:58:52,012 event=stream_resolver.best_missing channel=goonlord17
+2026-02-15 15:58:52,013 event=stream_resolver.resolve_hls_url duration_ms=300.54 channel=goonlord17
+2026-02-15 15:58:52,013 event=stream_resolver.resolve_failed channel=goonlord17 error=RuntimeError
+2026-02-15 15:58:52,013 event=stream_resolver.cache_miss channel=mrpogger213
+2026-02-15 15:58:52,324 event=stream_resolver.streams duration_ms=311.38 channel=mrpogger213
+2026-02-15 15:58:52,324 event=stream_resolver.best_missing channel=mrpogger213
+2026-02-15 15:58:52,324 event=stream_resolver.resolve_hls_url duration_ms=311.56 channel=mrpogger213
+2026-02-15 15:58:52,324 event=stream_resolver.resolve_failed channel=mrpogger213 error=RuntimeError
+2026-02-15 15:58:52,324 event=stream_resolver.cache_miss channel=purelol6
+2026-02-15 15:58:53,826 event=stream_resolver.streams duration_ms=1501.58 channel=purelol6
+2026-02-15 15:58:53,827 event=stream_resolver.to_url duration_ms=0.45 channel=purelol6
+2026-02-15 15:58:53,827 event=stream_resolver.resolve_hls_url duration_ms=1502.26 channel=purelol6
+2026-02-15 15:58:53,827 event=stream_resolver.cache_miss channel=fnhvr
+2026-02-15 15:58:54,126 event=stream_resolver.streams duration_ms=299.14 channel=fnhvr
+2026-02-15 15:58:54,126 event=stream_resolver.best_missing channel=fnhvr
+2026-02-15 15:58:54,126 event=stream_resolver.resolve_hls_url duration_ms=299.47 channel=fnhvr
+2026-02-15 15:58:54,126 event=stream_resolver.resolve_failed channel=fnhvr error=RuntimeError
+2026-02-15 15:58:54,126 event=stream_resolver.cache_miss channel=mytinsaw
+2026-02-15 15:58:54,408 event=stream_resolver.streams duration_ms=281.49 channel=mytinsaw
+2026-02-15 15:58:54,408 event=stream_resolver.best_missing channel=mytinsaw
+2026-02-15 15:58:54,408 event=stream_resolver.resolve_hls_url duration_ms=281.67 channel=mytinsaw
+2026-02-15 15:58:54,408 event=stream_resolver.resolve_failed channel=mytinsaw error=RuntimeError
+2026-02-15 15:58:54,408 event=stream_resolver.cache_miss channel=mytinsalt
+2026-02-15 15:58:54,718 event=stream_resolver.streams duration_ms=309.76 channel=mytinsalt
+2026-02-15 15:58:54,718 event=stream_resolver.best_missing channel=mytinsalt
+2026-02-15 15:58:54,718 event=stream_resolver.resolve_hls_url duration_ms=309.95 channel=mytinsalt
+2026-02-15 15:58:54,718 event=stream_resolver.resolve_failed channel=mytinsalt error=RuntimeError
+2026-02-15 15:58:54,719 event=stream_resolver.cache_miss channel=gent_josh
+2026-02-15 15:58:54,929 event=stream_resolver.streams duration_ms=209.74 channel=gent_josh
+2026-02-15 15:58:54,929 event=stream_resolver.best_missing channel=gent_josh
+2026-02-15 15:58:54,929 event=stream_resolver.resolve_hls_url duration_ms=209.95 channel=gent_josh
+2026-02-15 15:58:54,929 event=stream_resolver.resolve_failed channel=gent_josh error=RuntimeError
+2026-02-15 15:58:54,929 event=stream_resolver.cache_miss channel=darthloll
+2026-02-15 15:58:55,208 event=stream_resolver.streams duration_ms=279.11 channel=darthloll
+2026-02-15 15:58:55,208 event=stream_resolver.best_missing channel=darthloll
+2026-02-15 15:58:55,208 event=stream_resolver.resolve_hls_url duration_ms=279.45 channel=darthloll
+2026-02-15 15:58:55,208 event=stream_resolver.resolve_failed channel=darthloll error=RuntimeError
+2026-02-15 15:58:55,208 event=stream_resolver.cache_miss channel=darthllol
+2026-02-15 15:58:55,415 event=stream_resolver.streams duration_ms=206.27 channel=darthllol
+2026-02-15 15:58:55,415 event=stream_resolver.best_missing channel=darthllol
+2026-02-15 15:58:55,415 event=stream_resolver.resolve_hls_url duration_ms=206.44 channel=darthllol
+2026-02-15 15:58:55,415 event=stream_resolver.resolve_failed channel=darthllol error=RuntimeError
+2026-02-15 15:58:55,415 event=stream_resolver.cache_miss channel=f41th_mc
+2026-02-15 15:58:55,724 event=stream_resolver.streams duration_ms=309.26 channel=f41th_mc
+2026-02-15 15:58:55,725 event=stream_resolver.best_missing channel=f41th_mc
+2026-02-15 15:58:55,725 event=stream_resolver.resolve_hls_url duration_ms=309.42 channel=f41th_mc
+2026-02-15 15:58:55,725 event=stream_resolver.resolve_failed channel=f41th_mc error=RuntimeError
+2026-02-15 15:58:55,725 event=stream_resolver.cache_miss channel=uhcheez
+2026-02-15 15:58:56,029 event=stream_resolver.streams duration_ms=303.66 channel=uhcheez
+2026-02-15 15:58:56,029 event=stream_resolver.best_missing channel=uhcheez
+2026-02-15 15:58:56,029 event=stream_resolver.resolve_hls_url duration_ms=303.83 channel=uhcheez
+2026-02-15 15:58:56,029 event=stream_resolver.resolve_failed channel=uhcheez error=RuntimeError
+2026-02-15 15:58:56,029 event=stream_resolver.cache_miss channel=benemies
+2026-02-15 15:58:56,321 event=stream_resolver.streams duration_ms=292.45 channel=benemies
+2026-02-15 15:58:56,321 event=stream_resolver.best_missing channel=benemies
+2026-02-15 15:58:56,321 event=stream_resolver.resolve_hls_url duration_ms=292.64 channel=benemies
+2026-02-15 15:58:56,321 event=stream_resolver.resolve_failed channel=benemies error=RuntimeError
+2026-02-15 15:58:56,322 event=stream_resolver.cache_miss channel=aliceelayrin
+2026-02-15 15:58:56,526 event=stream_resolver.streams duration_ms=204.77 channel=aliceelayrin
+2026-02-15 15:58:56,527 event=stream_resolver.best_missing channel=aliceelayrin
+2026-02-15 15:58:56,527 event=stream_resolver.resolve_hls_url duration_ms=204.95 channel=aliceelayrin
+2026-02-15 15:58:56,527 event=stream_resolver.resolve_failed channel=aliceelayrin error=RuntimeError
+2026-02-15 15:58:56,527 event=stream_resolver.cache_miss channel=3tenacity
+2026-02-15 15:58:56,806 event=stream_resolver.streams duration_ms=279.37 channel=3tenacity
+2026-02-15 15:58:56,806 event=stream_resolver.best_missing channel=3tenacity
+2026-02-15 15:58:56,806 event=stream_resolver.resolve_hls_url duration_ms=279.55 channel=3tenacity
+2026-02-15 15:58:56,806 event=stream_resolver.resolve_failed channel=3tenacity error=RuntimeError
+2026-02-15 15:58:56,806 event=stream_resolver.cache_miss channel=7rc3r
+2026-02-15 15:58:57,093 event=stream_resolver.streams duration_ms=286.60 channel=7rc3r
+2026-02-15 15:58:57,093 event=stream_resolver.best_missing channel=7rc3r
+2026-02-15 15:58:57,093 event=stream_resolver.resolve_hls_url duration_ms=286.77 channel=7rc3r
+2026-02-15 15:58:57,093 event=stream_resolver.resolve_failed channel=7rc3r error=RuntimeError
+2026-02-15 15:58:57,093 event=stream_resolver.cache_miss channel=buzzaboo
+2026-02-15 15:58:57,390 event=stream_resolver.streams duration_ms=296.35 channel=buzzaboo
+2026-02-15 15:58:57,390 event=stream_resolver.best_missing channel=buzzaboo
+2026-02-15 15:58:57,390 event=stream_resolver.resolve_hls_url duration_ms=296.55 channel=buzzaboo
+2026-02-15 15:58:57,390 event=stream_resolver.resolve_failed channel=buzzaboo error=RuntimeError
+2026-02-15 15:58:57,390 event=stream_resolver.cache_miss channel=thatloganguylive
+2026-02-15 15:58:57,695 event=stream_resolver.streams duration_ms=304.50 channel=thatloganguylive
+2026-02-15 15:58:57,695 event=stream_resolver.best_missing channel=thatloganguylive
+2026-02-15 15:58:57,695 event=stream_resolver.resolve_hls_url duration_ms=304.69 channel=thatloganguylive
+2026-02-15 15:58:57,695 event=stream_resolver.resolve_failed channel=thatloganguylive error=RuntimeError
+2026-02-15 15:58:57,695 event=stream_resolver.cache_miss channel=nolettuceplease
+2026-02-15 15:58:58,009 event=stream_resolver.streams duration_ms=313.28 channel=nolettuceplease
+2026-02-15 15:58:58,009 event=stream_resolver.best_missing channel=nolettuceplease
+2026-02-15 15:58:58,009 event=stream_resolver.resolve_hls_url duration_ms=313.46 channel=nolettuceplease
+2026-02-15 15:58:58,009 event=stream_resolver.resolve_failed channel=nolettuceplease error=RuntimeError
+2026-02-15 15:58:58,009 event=stream_resolver.cache_miss channel=fulham
+2026-02-15 15:58:58,309 event=stream_resolver.streams duration_ms=300.24 channel=fulham
+2026-02-15 15:58:58,309 event=stream_resolver.best_missing channel=fulham
+2026-02-15 15:58:58,309 event=stream_resolver.resolve_hls_url duration_ms=300.42 channel=fulham
+2026-02-15 15:58:58,309 event=stream_resolver.resolve_failed channel=fulham error=RuntimeError
+2026-02-15 15:58:58,309 event=stream_resolver.cache_miss channel=fulspam
+2026-02-15 15:58:58,605 event=stream_resolver.streams duration_ms=294.88 channel=fulspam
+2026-02-15 15:58:58,605 event=stream_resolver.best_missing channel=fulspam
+2026-02-15 15:58:58,605 event=stream_resolver.resolve_hls_url duration_ms=295.08 channel=fulspam
+2026-02-15 15:58:58,605 event=stream_resolver.resolve_failed channel=fulspam error=RuntimeError
+2026-02-15 15:58:58,605 event=stream_resolver.cache_miss channel=hpx374
+2026-02-15 15:58:58,893 event=stream_resolver.streams duration_ms=288.12 channel=hpx374
+2026-02-15 15:58:58,893 event=stream_resolver.best_missing channel=hpx374
+2026-02-15 15:58:58,893 event=stream_resolver.resolve_hls_url duration_ms=288.32 channel=hpx374
+2026-02-15 15:58:58,893 event=stream_resolver.resolve_failed channel=hpx374 error=RuntimeError
+2026-02-15 15:58:58,893 event=stream_resolver.cache_miss channel=hpx375
+2026-02-15 15:58:59,206 event=stream_resolver.streams duration_ms=312.54 channel=hpx375
+2026-02-15 15:58:59,206 event=stream_resolver.best_missing channel=hpx375
+2026-02-15 15:58:59,206 event=stream_resolver.resolve_hls_url duration_ms=312.71 channel=hpx375
+2026-02-15 15:58:59,206 event=stream_resolver.resolve_failed channel=hpx375 error=RuntimeError
+2026-02-15 15:58:59,206 event=stream_resolver.cache_miss channel=versisntemo
+2026-02-15 15:58:59,523 event=stream_resolver.streams duration_ms=316.58 channel=versisntemo
+2026-02-15 15:58:59,523 event=stream_resolver.best_missing channel=versisntemo
+2026-02-15 15:58:59,523 event=stream_resolver.resolve_hls_url duration_ms=316.79 channel=versisntemo
+2026-02-15 15:58:59,523 event=stream_resolver.resolve_failed channel=versisntemo error=RuntimeError
+2026-02-15 15:58:59,523 event=stream_resolver.cache_miss channel=name_025
+2026-02-15 15:58:59,825 event=stream_resolver.streams duration_ms=302.00 channel=name_025
+2026-02-15 15:58:59,826 event=stream_resolver.best_missing channel=name_025
+2026-02-15 15:58:59,826 event=stream_resolver.resolve_hls_url duration_ms=302.22 channel=name_025
+2026-02-15 15:58:59,826 event=stream_resolver.resolve_failed channel=name_025 error=RuntimeError
+2026-02-15 15:58:59,826 event=stream_resolver.cache_miss channel=yubbawubba8
+2026-02-15 15:59:00,154 event=stream_resolver.streams duration_ms=328.12 channel=yubbawubba8
+2026-02-15 15:59:00,154 event=stream_resolver.best_missing channel=yubbawubba8
+2026-02-15 15:59:00,154 event=stream_resolver.resolve_hls_url duration_ms=328.40 channel=yubbawubba8
+2026-02-15 15:59:00,154 event=stream_resolver.resolve_failed channel=yubbawubba8 error=RuntimeError
+2026-02-15 15:59:00,154 event=stream_resolver.cache_miss channel=showetc
+2026-02-15 15:59:00,456 event=stream_resolver.streams duration_ms=301.01 channel=showetc
+2026-02-15 15:59:00,456 event=stream_resolver.best_missing channel=showetc
+2026-02-15 15:59:00,456 event=stream_resolver.resolve_hls_url duration_ms=301.21 channel=showetc
+2026-02-15 15:59:00,456 event=stream_resolver.resolve_failed channel=showetc error=RuntimeError
+2026-02-15 15:59:00,456 event=stream_resolver.cache_miss channel=tiipped_
+2026-02-15 15:59:00,757 event=stream_resolver.streams duration_ms=300.61 channel=tiipped_
+2026-02-15 15:59:00,757 event=stream_resolver.best_missing channel=tiipped_
+2026-02-15 15:59:00,757 event=stream_resolver.resolve_hls_url duration_ms=300.83 channel=tiipped_
+2026-02-15 15:59:00,757 event=stream_resolver.resolve_failed channel=tiipped_ error=RuntimeError
+2026-02-15 15:59:00,757 event=stream_resolver.cache_miss channel=thatguydzi
+2026-02-15 15:59:01,058 event=stream_resolver.streams duration_ms=301.28 channel=thatguydzi
+2026-02-15 15:59:01,059 event=stream_resolver.best_missing channel=thatguydzi
+2026-02-15 15:59:01,059 event=stream_resolver.resolve_hls_url duration_ms=301.52 channel=thatguydzi
+2026-02-15 15:59:01,059 event=stream_resolver.resolve_failed channel=thatguydzi error=RuntimeError
+2026-02-15 15:59:01,059 event=stream_resolver.cache_miss channel=ariamcsr
+2026-02-15 15:59:01,373 event=stream_resolver.streams duration_ms=313.76 channel=ariamcsr
+2026-02-15 15:59:01,373 event=stream_resolver.best_missing channel=ariamcsr
+2026-02-15 15:59:01,373 event=stream_resolver.resolve_hls_url duration_ms=313.94 channel=ariamcsr
+2026-02-15 15:59:01,373 event=stream_resolver.resolve_failed channel=ariamcsr error=RuntimeError
+2026-02-15 15:59:01,373 event=stream_resolver.cache_miss channel=andrewthespeedrunner
+2026-02-15 15:59:01,680 event=stream_resolver.streams duration_ms=306.67 channel=andrewthespeedrunner
+2026-02-15 15:59:01,680 event=stream_resolver.best_missing channel=andrewthespeedrunner
+2026-02-15 15:59:01,680 event=stream_resolver.resolve_hls_url duration_ms=306.89 channel=andrewthespeedrunner
+2026-02-15 15:59:01,680 event=stream_resolver.resolve_failed channel=andrewthespeedrunner error=RuntimeError
+2026-02-15 15:59:01,680 event=stream_resolver.cache_miss channel=pl_dkd_pl
+2026-02-15 15:59:01,986 event=stream_resolver.streams duration_ms=306.31 channel=pl_dkd_pl
+2026-02-15 15:59:01,987 event=stream_resolver.best_missing channel=pl_dkd_pl
+2026-02-15 15:59:01,987 event=stream_resolver.resolve_hls_url duration_ms=306.52 channel=pl_dkd_pl
+2026-02-15 15:59:01,987 event=stream_resolver.resolve_failed channel=pl_dkd_pl error=RuntimeError
+2026-02-15 15:59:01,987 event=stream_resolver.cache_miss channel=itsdxrklive
+2026-02-15 15:59:02,306 event=stream_resolver.streams duration_ms=319.04 channel=itsdxrklive
+2026-02-15 15:59:02,306 event=stream_resolver.best_missing channel=itsdxrklive
+2026-02-15 15:59:02,306 event=stream_resolver.resolve_hls_url duration_ms=319.22 channel=itsdxrklive
+2026-02-15 15:59:02,306 event=stream_resolver.resolve_failed channel=itsdxrklive error=RuntimeError
+2026-02-15 15:59:02,306 event=stream_resolver.cache_miss channel=saltron_mp4
+2026-02-15 15:59:02,607 event=stream_resolver.streams duration_ms=300.53 channel=saltron_mp4
+2026-02-15 15:59:02,607 event=stream_resolver.best_missing channel=saltron_mp4
+2026-02-15 15:59:02,607 event=stream_resolver.resolve_hls_url duration_ms=300.71 channel=saltron_mp4
+2026-02-15 15:59:02,607 event=stream_resolver.resolve_failed channel=saltron_mp4 error=RuntimeError
+2026-02-15 15:59:02,607 event=stream_resolver.cache_miss channel=fudge1
+2026-02-15 15:59:03,385 event=stream_resolver.streams duration_ms=777.54 channel=fudge1
+2026-02-15 15:59:03,385 event=stream_resolver.to_url duration_ms=0.31 channel=fudge1
+2026-02-15 15:59:03,385 event=stream_resolver.resolve_hls_url duration_ms=778.05 channel=fudge1
+2026-02-15 15:59:03,385 event=stream_resolver.cache_miss channel=bobinsky01
+2026-02-15 15:59:03,679 event=stream_resolver.streams duration_ms=293.23 channel=bobinsky01
+2026-02-15 15:59:03,679 event=stream_resolver.best_missing channel=bobinsky01
+2026-02-15 15:59:03,679 event=stream_resolver.resolve_hls_url duration_ms=293.46 channel=bobinsky01
+2026-02-15 15:59:03,679 event=stream_resolver.resolve_failed channel=bobinsky01 error=RuntimeError
+2026-02-15 15:59:03,679 event=stream_resolver.cache_miss channel=its_saanvi
+2026-02-15 15:59:03,978 event=stream_resolver.streams duration_ms=298.61 channel=its_saanvi
+2026-02-15 15:59:03,978 event=stream_resolver.best_missing channel=its_saanvi
+2026-02-15 15:59:03,978 event=stream_resolver.resolve_hls_url duration_ms=298.84 channel=its_saanvi
+2026-02-15 15:59:03,978 event=stream_resolver.resolve_failed channel=its_saanvi error=RuntimeError
+2026-02-15 15:59:03,978 event=stream_resolver.cache_miss channel=vicdoesgaminglive
+2026-02-15 15:59:04,296 event=stream_resolver.streams duration_ms=318.24 channel=vicdoesgaminglive
+2026-02-15 15:59:04,297 event=stream_resolver.best_missing channel=vicdoesgaminglive
+2026-02-15 15:59:04,297 event=stream_resolver.resolve_hls_url duration_ms=318.45 channel=vicdoesgaminglive
+2026-02-15 15:59:04,297 event=stream_resolver.resolve_failed channel=vicdoesgaminglive error=RuntimeError
+2026-02-15 15:59:04,297 event=stream_resolver.cache_miss channel=grooble_
+2026-02-15 15:59:04,591 event=stream_resolver.streams duration_ms=294.26 channel=grooble_
+2026-02-15 15:59:04,591 event=stream_resolver.best_missing channel=grooble_
+2026-02-15 15:59:04,591 event=stream_resolver.resolve_hls_url duration_ms=294.44 channel=grooble_
+2026-02-15 15:59:04,591 event=stream_resolver.resolve_failed channel=grooble_ error=RuntimeError
+2026-02-15 15:59:04,591 event=stream_resolver.cache_miss channel=charlottekity
+2026-02-15 15:59:04,883 event=stream_resolver.streams duration_ms=291.28 channel=charlottekity
+2026-02-15 15:59:04,883 event=stream_resolver.best_missing channel=charlottekity
+2026-02-15 15:59:04,883 event=stream_resolver.resolve_hls_url duration_ms=291.50 channel=charlottekity
+2026-02-15 15:59:04,883 event=stream_resolver.resolve_failed channel=charlottekity error=RuntimeError
+2026-02-15 15:59:04,883 event=stream_resolver.cache_miss channel=zightningg
+2026-02-15 15:59:05,191 event=stream_resolver.streams duration_ms=308.14 channel=zightningg
+2026-02-15 15:59:05,191 event=stream_resolver.best_missing channel=zightningg
+2026-02-15 15:59:05,192 event=stream_resolver.resolve_hls_url duration_ms=308.32 channel=zightningg
+2026-02-15 15:59:05,192 event=stream_resolver.resolve_failed channel=zightningg error=RuntimeError
+2026-02-15 15:59:05,192 event=stream_resolver.cache_miss channel=coyrhyme_
+2026-02-15 15:59:05,484 event=stream_resolver.streams duration_ms=291.89 channel=coyrhyme_
+2026-02-15 15:59:05,484 event=stream_resolver.best_missing channel=coyrhyme_
+2026-02-15 15:59:05,484 event=stream_resolver.resolve_hls_url duration_ms=292.08 channel=coyrhyme_
+2026-02-15 15:59:05,484 event=stream_resolver.resolve_failed channel=coyrhyme_ error=RuntimeError
+2026-02-15 15:59:05,484 event=stream_resolver.cache_miss channel=pillbug_09
+2026-02-15 15:59:05,691 event=stream_resolver.streams duration_ms=206.68 channel=pillbug_09
+2026-02-15 15:59:05,691 event=stream_resolver.best_missing channel=pillbug_09
+2026-02-15 15:59:05,691 event=stream_resolver.resolve_hls_url duration_ms=206.87 channel=pillbug_09
+2026-02-15 15:59:05,691 event=stream_resolver.resolve_failed channel=pillbug_09 error=RuntimeError
+2026-02-15 15:59:05,691 event=stream_resolver.cache_miss channel=aut1sm20
+2026-02-15 15:59:05,895 event=stream_resolver.streams duration_ms=203.81 channel=aut1sm20
+2026-02-15 15:59:05,895 event=stream_resolver.best_missing channel=aut1sm20
+2026-02-15 15:59:05,895 event=stream_resolver.resolve_hls_url duration_ms=204.02 channel=aut1sm20
+2026-02-15 15:59:05,895 event=stream_resolver.resolve_failed channel=aut1sm20 error=RuntimeError
+2026-02-15 15:59:05,895 event=stream_resolver.cache_miss channel=pandaendoz
+2026-02-15 15:59:06,196 event=stream_resolver.streams duration_ms=301.12 channel=pandaendoz
+2026-02-15 15:59:06,197 event=stream_resolver.best_missing channel=pandaendoz
+2026-02-15 15:59:06,197 event=stream_resolver.resolve_hls_url duration_ms=301.30 channel=pandaendoz
+2026-02-15 15:59:06,197 event=stream_resolver.resolve_failed channel=pandaendoz error=RuntimeError
+2026-02-15 15:59:06,484 event=player_window.set_streams.internal duration_ms=287.68 streams=5 focused=False created=5 reused=0 released=0
+2026-02-15 15:59:06,505 event=control_panel.refresh_list duration_ms=12.25
+2026-02-15 15:59:06,506 event=control_panel.toggle_paceman_mode duration_ms=12.97 enabled=True
+2026-02-15 15:59:06,506 event=control_panel.emit_active_streams count=63 focused=False paceman_mode=True manual_layout=True
+2026-02-15 15:59:06,532 event=control_panel.refresh_list duration_ms=25.37
+2026-02-15 15:59:06,543 event=control_panel.refresh_list duration_ms=11.21
+2026-02-15 15:59:06,543 event=control_panel.emit_active_streams count=63 focused=False paceman_mode=True manual_layout=True
+2026-02-15 15:59:06,554 event=control_panel.refresh_list duration_ms=10.21
+2026-02-15 15:59:06,564 event=control_panel.refresh_list duration_ms=10.41
+2026-02-15 15:59:06,576 event=control_panel.refresh_list duration_ms=11.43
+2026-02-15 15:59:06,587 event=control_panel.refresh_list duration_ms=11.14
+2026-02-15 15:59:06,601 event=control_panel.refresh_list duration_ms=13.00
+2026-02-15 15:59:24,264 event=control_panel.refresh_list duration_ms=16.60
+2026-02-15 15:59:24,264 event=control_panel.emit_active_streams count=2 focused=True paceman_mode=True manual_layout=False
+2026-02-15 15:59:24,264 event=stream_resolver.cache_hit channel=pjoes1
+2026-02-15 15:59:24,265 event=stream_resolver.cache_hit channel=czelco
+2026-02-15 15:59:24,265 event=resolve_channel_urls duration_ms=0.36 count=2 focused=True request_id=1 max_quality=720
+2026-02-15 15:59:24,345 event=player_window.set_streams.internal duration_ms=68.71 streams=2 focused=True created=0 reused=2 released=3
+2026-02-15 15:59:24,345 event=player_window.set_streams duration_ms=68.84 count=2 focused=True request_id=1 manual_mode=False
+2026-02-15 15:59:32,362 event=control_panel.refresh_list duration_ms=10.79
+2026-02-15 15:59:40,463 event=control_panel.refresh_list duration_ms=12.07
+2026-02-15 15:59:48,563 event=control_panel.refresh_list duration_ms=10.96
+2026-02-15 15:59:56,663 event=control_panel.refresh_list duration_ms=10.86
+2026-02-15 16:00:04,773 event=control_panel.refresh_list duration_ms=10.85
+2026-02-15 16:00:14,618 event=control_panel.refresh_list duration_ms=11.97
+2026-02-15 16:00:33,807 event=control_panel.refresh_list duration_ms=10.86
+2026-02-15 16:00:41,909 event=control_panel.refresh_list duration_ms=11.66
+2026-02-15 16:00:50,006 event=control_panel.refresh_list duration_ms=10.36
+2026-02-15 16:00:58,108 event=control_panel.refresh_list duration_ms=10.89
+2026-02-15 16:01:06,338 event=control_panel.refresh_list duration_ms=11.09
+2026-02-15 16:01:13,580 event=control_panel.refresh_list duration_ms=10.51
+2026-02-15 16:01:13,738 event=control_panel.refresh_list duration_ms=10.67
+2026-02-15 16:01:13,897 event=control_panel.refresh_list duration_ms=11.84
+2026-02-15 16:01:14,047 event=control_panel.refresh_list duration_ms=10.37
+2026-02-15 16:01:14,196 event=control_panel.refresh_list duration_ms=10.62
+2026-02-15 16:01:14,336 event=control_panel.refresh_list duration_ms=12.39
+2026-02-15 16:01:14,483 event=control_panel.refresh_list duration_ms=10.75
+2026-02-15 16:01:14,609 event=control_panel.refresh_list duration_ms=10.41
+2026-02-15 16:01:14,633 event=control_panel.refresh_list duration_ms=10.72
+2026-02-15 16:01:14,783 event=control_panel.refresh_list duration_ms=10.67
+2026-02-15 16:01:14,939 event=control_panel.refresh_list duration_ms=11.43
+2026-02-15 16:01:15,083 event=control_panel.refresh_list duration_ms=11.52
+2026-02-15 16:01:15,241 event=control_panel.refresh_list duration_ms=11.13
+2026-02-15 16:01:15,393 event=control_panel.refresh_list duration_ms=10.63
+2026-02-15 16:01:15,542 event=control_panel.refresh_list duration_ms=10.75
+2026-02-15 16:01:15,699 event=control_panel.refresh_list duration_ms=10.43
+2026-02-15 16:01:15,849 event=control_panel.refresh_list duration_ms=11.97
+2026-02-15 16:01:15,998 event=control_panel.refresh_list duration_ms=12.53
+2026-02-15 16:01:16,147 event=control_panel.refresh_list duration_ms=11.12
+2026-02-15 16:01:16,293 event=control_panel.refresh_list duration_ms=12.52
+2026-02-15 16:01:16,445 event=control_panel.refresh_list duration_ms=10.99
+2026-02-15 16:01:16,596 event=control_panel.refresh_list duration_ms=10.77
+2026-02-15 16:01:16,746 event=control_panel.refresh_list duration_ms=10.48
+2026-02-15 16:01:16,894 event=control_panel.refresh_list duration_ms=10.27
+2026-02-15 16:01:17,052 event=control_panel.refresh_list duration_ms=11.78
+2026-02-15 16:01:17,199 event=control_panel.refresh_list duration_ms=10.26
+2026-02-15 16:01:17,347 event=control_panel.refresh_list duration_ms=10.27
+2026-02-15 16:01:17,505 event=control_panel.refresh_list duration_ms=10.82
+2026-02-15 16:01:17,655 event=control_panel.refresh_list duration_ms=10.54
+2026-02-15 16:01:17,814 event=control_panel.refresh_list duration_ms=12.60
+2026-02-15 16:01:17,975 event=control_panel.refresh_list duration_ms=11.91
+2026-02-15 16:01:18,130 event=control_panel.refresh_list duration_ms=10.46
+2026-02-15 16:01:18,289 event=control_panel.refresh_list duration_ms=10.88
+2026-02-15 16:01:18,445 event=control_panel.refresh_list duration_ms=10.81
+2026-02-15 16:01:18,814 event=control_panel.refresh_list duration_ms=11.80
+2026-02-15 16:01:18,814 event=control_panel.emit_active_streams count=2 focused=False paceman_mode=True manual_layout=False
+2026-02-15 16:01:18,814 event=stream_resolver.cache_miss channel=pjoes1
+2026-02-15 16:01:19,207 event=control_panel.refresh_list duration_ms=11.92
+2026-02-15 16:01:19,388 event=control_panel.refresh_list duration_ms=10.54
+2026-02-15 16:01:19,952 event=stream_resolver.streams duration_ms=1137.49 channel=pjoes1
+2026-02-15 16:01:19,952 event=stream_resolver.to_url duration_ms=0.34 channel=pjoes1
+2026-02-15 16:01:19,952 event=stream_resolver.resolve_hls_url duration_ms=1138.06 channel=pjoes1
+2026-02-15 16:01:19,952 event=stream_resolver.cache_miss channel=czelco
+2026-02-15 16:01:21,679 event=stream_resolver.streams duration_ms=1726.93 channel=czelco
+2026-02-15 16:01:21,680 event=stream_resolver.to_url duration_ms=0.34 channel=czelco
+2026-02-15 16:01:21,680 event=stream_resolver.resolve_hls_url duration_ms=1727.59 channel=czelco
+2026-02-15 16:01:21,680 event=resolve_channel_urls duration_ms=2865.86 count=2 focused=False request_id=2 max_quality=720
+2026-02-15 16:01:21,785 event=player_window.set_streams.internal duration_ms=104.71 streams=2 focused=False created=2 reused=0 released=0
+2026-02-15 16:01:21,785 event=player_window.set_streams duration_ms=104.83 count=2 focused=False request_id=2 manual_mode=False
+2026-02-15 16:01:30,574 event=control_panel.refresh_list duration_ms=11.82
+2026-02-15 16:01:30,728 event=control_panel.refresh_list duration_ms=11.29
+2026-02-15 16:01:30,871 event=control_panel.refresh_list duration_ms=11.59
+2026-02-15 16:01:30,871 event=control_panel.emit_active_streams count=2 focused=True paceman_mode=True manual_layout=False
+2026-02-15 16:01:30,871 event=stream_resolver.cache_hit channel=pjoes1
+2026-02-15 16:01:30,871 event=stream_resolver.cache_hit channel=czelco
+2026-02-15 16:01:30,871 event=resolve_channel_urls duration_ms=0.14 count=2 focused=True request_id=3 max_quality=720
+2026-02-15 16:01:30,881 event=player_window.set_streams.internal duration_ms=0.09 streams=2 focused=True created=0 reused=2 released=0
+2026-02-15 16:01:30,881 event=player_window.set_streams duration_ms=0.21 count=2 focused=True request_id=3 manual_mode=False
+2026-02-15 16:01:31,011 event=control_panel.refresh_list duration_ms=11.25
+2026-02-15 16:01:31,153 event=control_panel.refresh_list duration_ms=11.56
+2026-02-15 16:01:31,315 event=control_panel.refresh_list duration_ms=10.61
+2026-02-15 16:01:33,674 event=control_panel.refresh_list duration_ms=10.35
+2026-02-15 16:01:33,674 event=control_panel.emit_active_streams count=1 focused=False paceman_mode=True manual_layout=False
+2026-02-15 16:01:33,674 event=stream_resolver.cache_hit channel=czelco
+2026-02-15 16:01:33,674 event=resolve_channel_urls duration_ms=0.16 count=1 focused=False request_id=4 max_quality=720
+2026-02-15 16:01:33,713 event=player_window.set_streams.internal duration_ms=33.39 streams=1 focused=False created=0 reused=1 released=1
+2026-02-15 16:01:33,713 event=player_window.set_streams duration_ms=33.54 count=1 focused=False request_id=4 manual_mode=False
+2026-02-15 16:01:38,843 event=control_panel.refresh_list duration_ms=10.13
+2026-02-15 16:01:39,007 event=control_panel.refresh_list duration_ms=10.20
+2026-02-15 16:01:39,157 event=control_panel.refresh_list duration_ms=10.21
+2026-02-15 16:01:39,304 event=control_panel.refresh_list duration_ms=11.60
+2026-02-15 16:01:39,304 event=control_panel.emit_active_streams count=1 focused=True paceman_mode=True manual_layout=False
+2026-02-15 16:01:39,304 event=stream_resolver.cache_hit channel=czelco
+2026-02-15 16:01:39,304 event=resolve_channel_urls duration_ms=0.10 count=1 focused=True request_id=5 max_quality=720
+2026-02-15 16:01:39,308 event=player_window.set_streams.internal duration_ms=0.06 streams=1 focused=True created=0 reused=1 released=0
+2026-02-15 16:01:39,308 event=player_window.set_streams duration_ms=0.13 count=1 focused=True request_id=5 manual_mode=False
+2026-02-15 16:01:39,449 event=control_panel.refresh_list duration_ms=10.58
+2026-02-15 16:01:39,590 event=control_panel.refresh_list duration_ms=10.44
+2026-02-15 16:01:39,742 event=control_panel.refresh_list duration_ms=11.19
+2026-02-15 16:01:39,884 event=control_panel.refresh_list duration_ms=12.17
+2026-02-15 16:01:40,029 event=control_panel.refresh_list duration_ms=10.45
+2026-02-15 16:01:40,176 event=control_panel.refresh_list duration_ms=10.95
+2026-02-15 16:01:40,325 event=control_panel.refresh_list duration_ms=11.15
+2026-02-15 16:01:41,775 event=control_panel.refresh_list duration_ms=11.37
+2026-02-15 16:01:41,940 event=control_panel.refresh_list duration_ms=10.85
+2026-02-15 16:01:49,883 event=control_panel.refresh_list duration_ms=14.62
+2026-02-15 16:01:57,982 event=control_panel.refresh_list duration_ms=11.36
+2026-02-15 16:02:06,864 event=control_panel.refresh_list duration_ms=10.87
+2026-02-15 16:02:14,958 event=control_panel.refresh_list duration_ms=11.03
+2026-02-15 16:02:24,611 event=control_panel.refresh_list duration_ms=12.94
+2026-02-15 16:02:44,240 event=control_panel.refresh_list duration_ms=10.69
+2026-02-15 16:02:53,007 event=control_panel.refresh_list duration_ms=11.14
+2026-02-15 16:03:01,100 event=control_panel.refresh_list duration_ms=10.73
+2026-02-15 16:03:09,201 event=control_panel.refresh_list duration_ms=13.03
+2026-02-15 16:03:17,293 event=control_panel.refresh_list duration_ms=11.04
+2026-02-15 16:03:25,390 event=control_panel.refresh_list duration_ms=10.31
+2026-02-15 16:03:26,256 event=perf_logger_started path=perf.log
+2026-02-15 16:03:26,368 event=stream_resolver.cache_miss channel=aquacordemc
+2026-02-15 16:03:27,258 event=stream_resolver.streams duration_ms=889.31 channel=aquacordemc
+2026-02-15 16:03:27,258 event=stream_resolver.best_missing channel=aquacordemc
+2026-02-15 16:03:27,258 event=stream_resolver.resolve_hls_url duration_ms=889.56 channel=aquacordemc
+2026-02-15 16:03:27,258 event=stream_resolver.resolve_failed channel=aquacordemc error=RuntimeError
+2026-02-15 16:03:27,258 event=stream_resolver.cache_miss channel=topimpapig
+2026-02-15 16:03:27,500 event=stream_resolver.streams duration_ms=241.69 channel=topimpapig
+2026-02-15 16:03:27,500 event=stream_resolver.best_missing channel=topimpapig
+2026-02-15 16:03:27,500 event=stream_resolver.resolve_hls_url duration_ms=241.86 channel=topimpapig
+2026-02-15 16:03:27,500 event=stream_resolver.resolve_failed channel=topimpapig error=RuntimeError
+2026-02-15 16:03:27,500 event=stream_resolver.cache_miss channel=wethr_
+2026-02-15 16:03:27,805 event=stream_resolver.streams duration_ms=304.84 channel=wethr_
+2026-02-15 16:03:27,805 event=stream_resolver.best_missing channel=wethr_
+2026-02-15 16:03:27,805 event=stream_resolver.resolve_hls_url duration_ms=305.00 channel=wethr_
+2026-02-15 16:03:27,805 event=stream_resolver.resolve_failed channel=wethr_ error=RuntimeError
+2026-02-15 16:03:27,805 event=stream_resolver.cache_miss channel=cornflakesmcsr
+2026-02-15 16:03:29,020 event=stream_resolver.streams duration_ms=1214.32 channel=cornflakesmcsr
+2026-02-15 16:03:29,020 event=stream_resolver.to_url duration_ms=0.32 channel=cornflakesmcsr
+2026-02-15 16:03:29,020 event=stream_resolver.resolve_hls_url duration_ms=1214.83 channel=cornflakesmcsr
+2026-02-15 16:03:29,020 event=stream_resolver.cache_miss channel=jackowackio
+2026-02-15 16:03:29,338 event=stream_resolver.streams duration_ms=317.70 channel=jackowackio
+2026-02-15 16:03:29,338 event=stream_resolver.best_missing channel=jackowackio
+2026-02-15 16:03:29,338 event=stream_resolver.resolve_hls_url duration_ms=317.92 channel=jackowackio
+2026-02-15 16:03:29,338 event=stream_resolver.resolve_failed channel=jackowackio error=RuntimeError
+2026-02-15 16:03:29,338 event=stream_resolver.cache_miss channel=jackowackoalt
+2026-02-15 16:03:29,637 event=stream_resolver.streams duration_ms=298.77 channel=jackowackoalt
+2026-02-15 16:03:29,637 event=stream_resolver.best_missing channel=jackowackoalt
+2026-02-15 16:03:29,637 event=stream_resolver.resolve_hls_url duration_ms=298.96 channel=jackowackoalt
+2026-02-15 16:03:29,637 event=stream_resolver.resolve_failed channel=jackowackoalt error=RuntimeError
+2026-02-15 16:03:29,637 event=stream_resolver.cache_miss channel=okshey
+2026-02-15 16:03:29,924 event=stream_resolver.streams duration_ms=286.60 channel=okshey
+2026-02-15 16:03:29,924 event=stream_resolver.best_missing channel=okshey
+2026-02-15 16:03:29,924 event=stream_resolver.resolve_hls_url duration_ms=286.78 channel=okshey
+2026-02-15 16:03:29,924 event=stream_resolver.resolve_failed channel=okshey error=RuntimeError
+2026-02-15 16:03:29,924 event=stream_resolver.cache_miss channel=okrzej1
+2026-02-15 16:03:30,590 event=stream_resolver.streams duration_ms=665.27 channel=okrzej1
+2026-02-15 16:03:30,590 event=stream_resolver.best_missing channel=okrzej1
+2026-02-15 16:03:30,590 event=stream_resolver.resolve_hls_url duration_ms=665.44 channel=okrzej1
+2026-02-15 16:03:30,590 event=stream_resolver.resolve_failed channel=okrzej1 error=RuntimeError
+2026-02-15 16:03:30,590 event=stream_resolver.cache_miss channel=muhammadpro5741
+2026-02-15 16:03:30,907 event=stream_resolver.streams duration_ms=317.09 channel=muhammadpro5741
+2026-02-15 16:03:30,909 event=stream_resolver.best_missing channel=muhammadpro5741
+2026-02-15 16:03:30,909 event=stream_resolver.resolve_hls_url duration_ms=319.06 channel=muhammadpro5741
+2026-02-15 16:03:30,909 event=stream_resolver.resolve_failed channel=muhammadpro5741 error=RuntimeError
+2026-02-15 16:03:30,909 event=stream_resolver.cache_miss channel=czelco
+2026-02-15 16:03:32,939 event=stream_resolver.streams duration_ms=2029.87 channel=czelco
+2026-02-15 16:03:32,940 event=stream_resolver.to_url duration_ms=0.38 channel=czelco
+2026-02-15 16:03:32,940 event=stream_resolver.resolve_hls_url duration_ms=2030.47 channel=czelco
+2026-02-15 16:03:32,940 event=stream_resolver.cache_miss channel=czelcoalt
+2026-02-15 16:03:33,237 event=stream_resolver.streams duration_ms=296.80 channel=czelcoalt
+2026-02-15 16:03:33,237 event=stream_resolver.best_missing channel=czelcoalt
+2026-02-15 16:03:33,237 event=stream_resolver.resolve_hls_url duration_ms=297.05 channel=czelcoalt
+2026-02-15 16:03:33,237 event=stream_resolver.resolve_failed channel=czelcoalt error=RuntimeError
+2026-02-15 16:03:33,237 event=stream_resolver.cache_miss channel=pjoes1
+2026-02-15 16:03:34,063 event=stream_resolver.streams duration_ms=825.49 channel=pjoes1
+2026-02-15 16:03:34,063 event=stream_resolver.to_url duration_ms=0.31 channel=pjoes1
+2026-02-15 16:03:34,063 event=stream_resolver.resolve_hls_url duration_ms=826.19 channel=pjoes1
+2026-02-15 16:03:34,063 event=stream_resolver.cache_miss channel=bbiddd
+2026-02-15 16:03:34,346 event=stream_resolver.streams duration_ms=282.14 channel=bbiddd
+2026-02-15 16:03:34,346 event=stream_resolver.best_missing channel=bbiddd
+2026-02-15 16:03:34,346 event=stream_resolver.resolve_hls_url duration_ms=282.35 channel=bbiddd
+2026-02-15 16:03:34,346 event=stream_resolver.resolve_failed channel=bbiddd error=RuntimeError
+2026-02-15 16:03:34,346 event=stream_resolver.cache_miss channel=leahmp3
+2026-02-15 16:03:34,644 event=stream_resolver.streams duration_ms=297.97 channel=leahmp3
+2026-02-15 16:03:34,644 event=stream_resolver.best_missing channel=leahmp3
+2026-02-15 16:03:34,644 event=stream_resolver.resolve_hls_url duration_ms=298.16 channel=leahmp3
+2026-02-15 16:03:34,644 event=stream_resolver.resolve_failed channel=leahmp3 error=RuntimeError
+2026-02-15 16:03:34,644 event=stream_resolver.cache_miss channel=leahhhsr
+2026-02-15 16:03:34,850 event=stream_resolver.streams duration_ms=205.92 channel=leahhhsr
+2026-02-15 16:03:34,850 event=stream_resolver.best_missing channel=leahhhsr
+2026-02-15 16:03:34,851 event=stream_resolver.resolve_hls_url duration_ms=206.12 channel=leahhhsr
+2026-02-15 16:03:34,851 event=stream_resolver.resolve_failed channel=leahhhsr error=RuntimeError
+2026-02-15 16:03:34,851 event=stream_resolver.cache_miss channel=paukll
+2026-02-15 16:03:35,174 event=stream_resolver.streams duration_ms=323.07 channel=paukll
+2026-02-15 16:03:35,174 event=stream_resolver.best_missing channel=paukll
+2026-02-15 16:03:35,174 event=stream_resolver.resolve_hls_url duration_ms=323.23 channel=paukll
+2026-02-15 16:03:35,174 event=stream_resolver.resolve_failed channel=paukll error=RuntimeError
+2026-02-15 16:03:35,174 event=stream_resolver.cache_miss channel=xx_rms_xxgamer1337
+2026-02-15 16:03:35,493 event=stream_resolver.streams duration_ms=318.64 channel=xx_rms_xxgamer1337
+2026-02-15 16:03:35,493 event=stream_resolver.best_missing channel=xx_rms_xxgamer1337
+2026-02-15 16:03:35,493 event=stream_resolver.resolve_hls_url duration_ms=318.87 channel=xx_rms_xxgamer1337
+2026-02-15 16:03:35,493 event=stream_resolver.resolve_failed channel=xx_rms_xxgamer1337 error=RuntimeError
+2026-02-15 16:03:35,493 event=stream_resolver.cache_miss channel=nacay
+2026-02-15 16:03:35,780 event=stream_resolver.streams duration_ms=286.32 channel=nacay
+2026-02-15 16:03:35,780 event=stream_resolver.best_missing channel=nacay
+2026-02-15 16:03:35,780 event=stream_resolver.resolve_hls_url duration_ms=286.56 channel=nacay
+2026-02-15 16:03:35,780 event=stream_resolver.resolve_failed channel=nacay error=RuntimeError
+2026-02-15 16:03:35,780 event=stream_resolver.cache_miss channel=dintymit
+2026-02-15 16:03:36,067 event=stream_resolver.streams duration_ms=286.52 channel=dintymit
+2026-02-15 16:03:36,067 event=stream_resolver.best_missing channel=dintymit
+2026-02-15 16:03:36,067 event=stream_resolver.resolve_hls_url duration_ms=286.71 channel=dintymit
+2026-02-15 16:03:36,067 event=stream_resolver.resolve_failed channel=dintymit error=RuntimeError
+2026-02-15 16:03:36,067 event=stream_resolver.cache_miss channel=goonlord17
+2026-02-15 16:03:36,600 event=stream_resolver.streams duration_ms=533.32 channel=goonlord17
+2026-02-15 16:03:36,600 event=stream_resolver.best_missing channel=goonlord17
+2026-02-15 16:03:36,601 event=stream_resolver.resolve_hls_url duration_ms=533.57 channel=goonlord17
+2026-02-15 16:03:36,601 event=stream_resolver.resolve_failed channel=goonlord17 error=RuntimeError
+2026-02-15 16:03:36,601 event=stream_resolver.cache_miss channel=mrpogger213
+2026-02-15 16:03:36,903 event=stream_resolver.streams duration_ms=301.92 channel=mrpogger213
+2026-02-15 16:03:36,903 event=stream_resolver.best_missing channel=mrpogger213
+2026-02-15 16:03:36,903 event=stream_resolver.resolve_hls_url duration_ms=302.11 channel=mrpogger213
+2026-02-15 16:03:36,903 event=stream_resolver.resolve_failed channel=mrpogger213 error=RuntimeError
+2026-02-15 16:03:36,903 event=stream_resolver.cache_miss channel=purelol6
+2026-02-15 16:03:38,738 event=stream_resolver.streams duration_ms=1835.28 channel=purelol6
+2026-02-15 16:03:38,739 event=stream_resolver.to_url duration_ms=0.33 channel=purelol6
+2026-02-15 16:03:38,739 event=stream_resolver.resolve_hls_url duration_ms=1835.84 channel=purelol6
+2026-02-15 16:03:38,739 event=stream_resolver.cache_miss channel=fnhvr
+2026-02-15 16:03:39,018 event=stream_resolver.streams duration_ms=278.70 channel=fnhvr
+2026-02-15 16:03:39,018 event=stream_resolver.best_missing channel=fnhvr
+2026-02-15 16:03:39,018 event=stream_resolver.resolve_hls_url duration_ms=278.99 channel=fnhvr
+2026-02-15 16:03:39,018 event=stream_resolver.resolve_failed channel=fnhvr error=RuntimeError
+2026-02-15 16:03:39,018 event=stream_resolver.cache_miss channel=mytinsaw
+2026-02-15 16:03:39,319 event=stream_resolver.streams duration_ms=300.71 channel=mytinsaw
+2026-02-15 16:03:39,319 event=stream_resolver.best_missing channel=mytinsaw
+2026-02-15 16:03:39,319 event=stream_resolver.resolve_hls_url duration_ms=300.88 channel=mytinsaw
+2026-02-15 16:03:39,319 event=stream_resolver.resolve_failed channel=mytinsaw error=RuntimeError
+2026-02-15 16:03:39,319 event=stream_resolver.cache_miss channel=mytinsalt
+2026-02-15 16:03:39,618 event=stream_resolver.streams duration_ms=299.14 channel=mytinsalt
+2026-02-15 16:03:39,619 event=stream_resolver.best_missing channel=mytinsalt
+2026-02-15 16:03:39,619 event=stream_resolver.resolve_hls_url duration_ms=299.31 channel=mytinsalt
+2026-02-15 16:03:39,619 event=stream_resolver.resolve_failed channel=mytinsalt error=RuntimeError
+2026-02-15 16:03:39,619 event=stream_resolver.cache_miss channel=gent_josh
+2026-02-15 16:03:39,828 event=stream_resolver.streams duration_ms=209.57 channel=gent_josh
+2026-02-15 16:03:39,829 event=stream_resolver.best_missing channel=gent_josh
+2026-02-15 16:03:39,829 event=stream_resolver.resolve_hls_url duration_ms=209.78 channel=gent_josh
+2026-02-15 16:03:39,829 event=stream_resolver.resolve_failed channel=gent_josh error=RuntimeError
+2026-02-15 16:03:39,829 event=stream_resolver.cache_miss channel=darthloll
+2026-02-15 16:03:40,153 event=stream_resolver.streams duration_ms=324.10 channel=darthloll
+2026-02-15 16:03:40,153 event=stream_resolver.best_missing channel=darthloll
+2026-02-15 16:03:40,153 event=stream_resolver.resolve_hls_url duration_ms=324.27 channel=darthloll
+2026-02-15 16:03:40,153 event=stream_resolver.resolve_failed channel=darthloll error=RuntimeError
+2026-02-15 16:03:40,153 event=stream_resolver.cache_miss channel=darthllol
+2026-02-15 16:03:40,362 event=stream_resolver.streams duration_ms=208.33 channel=darthllol
+2026-02-15 16:03:40,362 event=stream_resolver.best_missing channel=darthllol
+2026-02-15 16:03:40,362 event=stream_resolver.resolve_hls_url duration_ms=208.54 channel=darthllol
+2026-02-15 16:03:40,362 event=stream_resolver.resolve_failed channel=darthllol error=RuntimeError
+2026-02-15 16:03:40,362 event=stream_resolver.cache_miss channel=f41th_mc
+2026-02-15 16:03:40,686 event=stream_resolver.streams duration_ms=323.72 channel=f41th_mc
+2026-02-15 16:03:40,686 event=stream_resolver.best_missing channel=f41th_mc
+2026-02-15 16:03:40,686 event=stream_resolver.resolve_hls_url duration_ms=323.94 channel=f41th_mc
+2026-02-15 16:03:40,686 event=stream_resolver.resolve_failed channel=f41th_mc error=RuntimeError
+2026-02-15 16:03:40,686 event=stream_resolver.cache_miss channel=uhcheez
+2026-02-15 16:03:41,011 event=stream_resolver.streams duration_ms=324.43 channel=uhcheez
+2026-02-15 16:03:41,011 event=stream_resolver.best_missing channel=uhcheez
+2026-02-15 16:03:41,011 event=stream_resolver.resolve_hls_url duration_ms=324.60 channel=uhcheez
+2026-02-15 16:03:41,011 event=stream_resolver.resolve_failed channel=uhcheez error=RuntimeError
+2026-02-15 16:03:41,011 event=stream_resolver.cache_miss channel=benemies
+2026-02-15 16:03:41,329 event=stream_resolver.streams duration_ms=318.14 channel=benemies
+2026-02-15 16:03:41,329 event=stream_resolver.best_missing channel=benemies
+2026-02-15 16:03:41,330 event=stream_resolver.resolve_hls_url duration_ms=318.39 channel=benemies
+2026-02-15 16:03:41,330 event=stream_resolver.resolve_failed channel=benemies error=RuntimeError
+2026-02-15 16:03:41,330 event=stream_resolver.cache_miss channel=aliceelayrin
+2026-02-15 16:03:41,544 event=stream_resolver.streams duration_ms=214.25 channel=aliceelayrin
+2026-02-15 16:03:41,544 event=stream_resolver.best_missing channel=aliceelayrin
+2026-02-15 16:03:41,544 event=stream_resolver.resolve_hls_url duration_ms=214.46 channel=aliceelayrin
+2026-02-15 16:03:41,544 event=stream_resolver.resolve_failed channel=aliceelayrin error=RuntimeError
+2026-02-15 16:03:41,544 event=stream_resolver.cache_miss channel=3tenacity
+2026-02-15 16:03:41,840 event=stream_resolver.streams duration_ms=295.57 channel=3tenacity
+2026-02-15 16:03:41,840 event=stream_resolver.best_missing channel=3tenacity
+2026-02-15 16:03:41,840 event=stream_resolver.resolve_hls_url duration_ms=295.74 channel=3tenacity
+2026-02-15 16:03:41,840 event=stream_resolver.resolve_failed channel=3tenacity error=RuntimeError
+2026-02-15 16:03:41,840 event=stream_resolver.cache_miss channel=7rc3r
+2026-02-15 16:03:42,145 event=stream_resolver.streams duration_ms=305.02 channel=7rc3r
+2026-02-15 16:03:42,146 event=stream_resolver.best_missing channel=7rc3r
+2026-02-15 16:03:42,146 event=stream_resolver.resolve_hls_url duration_ms=305.20 channel=7rc3r
+2026-02-15 16:03:42,146 event=stream_resolver.resolve_failed channel=7rc3r error=RuntimeError
+2026-02-15 16:03:42,146 event=stream_resolver.cache_miss channel=buzzaboo
+2026-02-15 16:03:42,493 event=stream_resolver.streams duration_ms=346.93 channel=buzzaboo
+2026-02-15 16:03:42,493 event=stream_resolver.best_missing channel=buzzaboo
+2026-02-15 16:03:42,493 event=stream_resolver.resolve_hls_url duration_ms=347.11 channel=buzzaboo
+2026-02-15 16:03:42,493 event=stream_resolver.resolve_failed channel=buzzaboo error=RuntimeError
+2026-02-15 16:03:42,493 event=stream_resolver.cache_miss channel=thatloganguylive
+2026-02-15 16:03:42,814 event=stream_resolver.streams duration_ms=321.08 channel=thatloganguylive
+2026-02-15 16:03:42,814 event=stream_resolver.best_missing channel=thatloganguylive
+2026-02-15 16:03:42,814 event=stream_resolver.resolve_hls_url duration_ms=321.29 channel=thatloganguylive
+2026-02-15 16:03:42,814 event=stream_resolver.resolve_failed channel=thatloganguylive error=RuntimeError
+2026-02-15 16:03:42,815 event=stream_resolver.cache_miss channel=nolettuceplease
+2026-02-15 16:03:43,137 event=stream_resolver.streams duration_ms=322.86 channel=nolettuceplease
+2026-02-15 16:03:43,138 event=stream_resolver.best_missing channel=nolettuceplease
+2026-02-15 16:03:43,138 event=stream_resolver.resolve_hls_url duration_ms=323.02 channel=nolettuceplease
+2026-02-15 16:03:43,138 event=stream_resolver.resolve_failed channel=nolettuceplease error=RuntimeError
+2026-02-15 16:03:43,138 event=stream_resolver.cache_miss channel=fulham
+2026-02-15 16:03:43,433 event=stream_resolver.streams duration_ms=295.22 channel=fulham
+2026-02-15 16:03:43,433 event=stream_resolver.best_missing channel=fulham
+2026-02-15 16:03:43,433 event=stream_resolver.resolve_hls_url duration_ms=295.40 channel=fulham
+2026-02-15 16:03:43,433 event=stream_resolver.resolve_failed channel=fulham error=RuntimeError
+2026-02-15 16:03:43,433 event=stream_resolver.cache_miss channel=fulspam
+2026-02-15 16:03:43,720 event=stream_resolver.streams duration_ms=286.37 channel=fulspam
+2026-02-15 16:03:43,720 event=stream_resolver.best_missing channel=fulspam
+2026-02-15 16:03:43,720 event=stream_resolver.resolve_hls_url duration_ms=286.65 channel=fulspam
+2026-02-15 16:03:43,720 event=stream_resolver.resolve_failed channel=fulspam error=RuntimeError
+2026-02-15 16:03:43,720 event=stream_resolver.cache_miss channel=hpx374
+2026-02-15 16:03:44,011 event=stream_resolver.streams duration_ms=290.35 channel=hpx374
+2026-02-15 16:03:44,011 event=stream_resolver.best_missing channel=hpx374
+2026-02-15 16:03:44,011 event=stream_resolver.resolve_hls_url duration_ms=290.60 channel=hpx374
+2026-02-15 16:03:44,011 event=stream_resolver.resolve_failed channel=hpx374 error=RuntimeError
+2026-02-15 16:03:44,011 event=stream_resolver.cache_miss channel=hpx375
+2026-02-15 16:03:44,313 event=stream_resolver.streams duration_ms=302.30 channel=hpx375
+2026-02-15 16:03:44,313 event=stream_resolver.best_missing channel=hpx375
+2026-02-15 16:03:44,313 event=stream_resolver.resolve_hls_url duration_ms=302.49 channel=hpx375
+2026-02-15 16:03:44,313 event=stream_resolver.resolve_failed channel=hpx375 error=RuntimeError
+2026-02-15 16:03:44,314 event=stream_resolver.cache_miss channel=versisntemo
+2026-02-15 16:03:44,629 event=stream_resolver.streams duration_ms=315.06 channel=versisntemo
+2026-02-15 16:03:44,629 event=stream_resolver.best_missing channel=versisntemo
+2026-02-15 16:03:44,629 event=stream_resolver.resolve_hls_url duration_ms=315.25 channel=versisntemo
+2026-02-15 16:03:44,629 event=stream_resolver.resolve_failed channel=versisntemo error=RuntimeError
+2026-02-15 16:03:44,629 event=stream_resolver.cache_miss channel=name_025
+2026-02-15 16:03:44,913 event=stream_resolver.streams duration_ms=284.16 channel=name_025
+2026-02-15 16:03:44,913 event=stream_resolver.best_missing channel=name_025
+2026-02-15 16:03:44,914 event=stream_resolver.resolve_hls_url duration_ms=284.41 channel=name_025
+2026-02-15 16:03:44,914 event=stream_resolver.resolve_failed channel=name_025 error=RuntimeError
+2026-02-15 16:03:44,914 event=stream_resolver.cache_miss channel=yubbawubba8
+2026-02-15 16:03:45,217 event=stream_resolver.streams duration_ms=302.77 channel=yubbawubba8
+2026-02-15 16:03:45,217 event=stream_resolver.best_missing channel=yubbawubba8
+2026-02-15 16:03:45,217 event=stream_resolver.resolve_hls_url duration_ms=302.96 channel=yubbawubba8
+2026-02-15 16:03:45,217 event=stream_resolver.resolve_failed channel=yubbawubba8 error=RuntimeError
+2026-02-15 16:03:45,217 event=stream_resolver.cache_miss channel=showetc
+2026-02-15 16:03:45,520 event=stream_resolver.streams duration_ms=302.74 channel=showetc
+2026-02-15 16:03:45,520 event=stream_resolver.best_missing channel=showetc
+2026-02-15 16:03:45,520 event=stream_resolver.resolve_hls_url duration_ms=303.00 channel=showetc
+2026-02-15 16:03:45,520 event=stream_resolver.resolve_failed channel=showetc error=RuntimeError
+2026-02-15 16:03:45,520 event=stream_resolver.cache_miss channel=tiipped_
+2026-02-15 16:03:45,821 event=stream_resolver.streams duration_ms=301.01 channel=tiipped_
+2026-02-15 16:03:45,821 event=stream_resolver.best_missing channel=tiipped_
+2026-02-15 16:03:45,821 event=stream_resolver.resolve_hls_url duration_ms=301.19 channel=tiipped_
+2026-02-15 16:03:45,821 event=stream_resolver.resolve_failed channel=tiipped_ error=RuntimeError
+2026-02-15 16:03:45,821 event=stream_resolver.cache_miss channel=thatguydzi
+2026-02-15 16:03:46,099 event=stream_resolver.streams duration_ms=277.60 channel=thatguydzi
+2026-02-15 16:03:46,099 event=stream_resolver.best_missing channel=thatguydzi
+2026-02-15 16:03:46,099 event=stream_resolver.resolve_hls_url duration_ms=277.85 channel=thatguydzi
+2026-02-15 16:03:46,099 event=stream_resolver.resolve_failed channel=thatguydzi error=RuntimeError
+2026-02-15 16:03:46,099 event=stream_resolver.cache_miss channel=ariamcsr
+2026-02-15 16:03:46,399 event=stream_resolver.streams duration_ms=299.89 channel=ariamcsr
+2026-02-15 16:03:46,399 event=stream_resolver.best_missing channel=ariamcsr
+2026-02-15 16:03:46,399 event=stream_resolver.resolve_hls_url duration_ms=300.06 channel=ariamcsr
+2026-02-15 16:03:46,400 event=stream_resolver.resolve_failed channel=ariamcsr error=RuntimeError
+2026-02-15 16:03:46,400 event=stream_resolver.cache_miss channel=andrewthespeedrunner
+2026-02-15 16:03:46,720 event=stream_resolver.streams duration_ms=320.34 channel=andrewthespeedrunner
+2026-02-15 16:03:46,720 event=stream_resolver.best_missing channel=andrewthespeedrunner
+2026-02-15 16:03:46,720 event=stream_resolver.resolve_hls_url duration_ms=320.51 channel=andrewthespeedrunner
+2026-02-15 16:03:46,720 event=stream_resolver.resolve_failed channel=andrewthespeedrunner error=RuntimeError
+2026-02-15 16:03:46,720 event=stream_resolver.cache_miss channel=pl_dkd_pl
+2026-02-15 16:03:47,036 event=stream_resolver.streams duration_ms=316.00 channel=pl_dkd_pl
+2026-02-15 16:03:47,037 event=stream_resolver.best_missing channel=pl_dkd_pl
+2026-02-15 16:03:47,037 event=stream_resolver.resolve_hls_url duration_ms=316.26 channel=pl_dkd_pl
+2026-02-15 16:03:47,037 event=stream_resolver.resolve_failed channel=pl_dkd_pl error=RuntimeError
+2026-02-15 16:03:47,037 event=stream_resolver.cache_miss channel=itsdxrklive
+2026-02-15 16:03:47,358 event=stream_resolver.streams duration_ms=320.86 channel=itsdxrklive
+2026-02-15 16:03:47,358 event=stream_resolver.best_missing channel=itsdxrklive
+2026-02-15 16:03:47,358 event=stream_resolver.resolve_hls_url duration_ms=321.06 channel=itsdxrklive
+2026-02-15 16:03:47,358 event=stream_resolver.resolve_failed channel=itsdxrklive error=RuntimeError
+2026-02-15 16:03:47,358 event=stream_resolver.cache_miss channel=saltron_mp4
+2026-02-15 16:03:47,674 event=stream_resolver.streams duration_ms=315.44 channel=saltron_mp4
+2026-02-15 16:03:47,674 event=stream_resolver.best_missing channel=saltron_mp4
+2026-02-15 16:03:47,674 event=stream_resolver.resolve_hls_url duration_ms=315.67 channel=saltron_mp4
+2026-02-15 16:03:47,674 event=stream_resolver.resolve_failed channel=saltron_mp4 error=RuntimeError
+2026-02-15 16:03:47,674 event=stream_resolver.cache_miss channel=fudge1
+2026-02-15 16:03:48,435 event=stream_resolver.streams duration_ms=761.03 channel=fudge1
+2026-02-15 16:03:48,436 event=stream_resolver.to_url duration_ms=0.37 channel=fudge1
+2026-02-15 16:03:48,436 event=stream_resolver.resolve_hls_url duration_ms=761.63 channel=fudge1
+2026-02-15 16:03:48,436 event=stream_resolver.cache_miss channel=bobinsky01
+2026-02-15 16:03:48,738 event=stream_resolver.streams duration_ms=302.37 channel=bobinsky01
+2026-02-15 16:03:48,738 event=stream_resolver.best_missing channel=bobinsky01
+2026-02-15 16:03:48,738 event=stream_resolver.resolve_hls_url duration_ms=302.61 channel=bobinsky01
+2026-02-15 16:03:48,738 event=stream_resolver.resolve_failed channel=bobinsky01 error=RuntimeError
+2026-02-15 16:03:48,738 event=stream_resolver.cache_miss channel=its_saanvi
+2026-02-15 16:03:49,042 event=stream_resolver.streams duration_ms=303.49 channel=its_saanvi
+2026-02-15 16:03:49,042 event=stream_resolver.best_missing channel=its_saanvi
+2026-02-15 16:03:49,042 event=stream_resolver.resolve_hls_url duration_ms=303.74 channel=its_saanvi
+2026-02-15 16:03:49,042 event=stream_resolver.resolve_failed channel=its_saanvi error=RuntimeError
+2026-02-15 16:03:49,042 event=stream_resolver.cache_miss channel=vicdoesgaminglive
+2026-02-15 16:03:49,357 event=stream_resolver.streams duration_ms=314.34 channel=vicdoesgaminglive
+2026-02-15 16:03:49,357 event=stream_resolver.best_missing channel=vicdoesgaminglive
+2026-02-15 16:03:49,357 event=stream_resolver.resolve_hls_url duration_ms=314.58 channel=vicdoesgaminglive
+2026-02-15 16:03:49,357 event=stream_resolver.resolve_failed channel=vicdoesgaminglive error=RuntimeError
+2026-02-15 16:03:49,357 event=stream_resolver.cache_miss channel=grooble_
+2026-02-15 16:03:49,653 event=stream_resolver.streams duration_ms=295.47 channel=grooble_
+2026-02-15 16:03:49,653 event=stream_resolver.best_missing channel=grooble_
+2026-02-15 16:03:49,653 event=stream_resolver.resolve_hls_url duration_ms=295.66 channel=grooble_
+2026-02-15 16:03:49,653 event=stream_resolver.resolve_failed channel=grooble_ error=RuntimeError
+2026-02-15 16:03:49,653 event=stream_resolver.cache_miss channel=charlottekity
+2026-02-15 16:03:49,974 event=stream_resolver.streams duration_ms=321.14 channel=charlottekity
+2026-02-15 16:03:49,974 event=stream_resolver.best_missing channel=charlottekity
+2026-02-15 16:03:49,974 event=stream_resolver.resolve_hls_url duration_ms=321.32 channel=charlottekity
+2026-02-15 16:03:49,975 event=stream_resolver.resolve_failed channel=charlottekity error=RuntimeError
+2026-02-15 16:03:49,975 event=stream_resolver.cache_miss channel=zightningg
+2026-02-15 16:03:50,260 event=stream_resolver.streams duration_ms=285.72 channel=zightningg
+2026-02-15 16:03:50,261 event=stream_resolver.best_missing channel=zightningg
+2026-02-15 16:03:50,261 event=stream_resolver.resolve_hls_url duration_ms=285.96 channel=zightningg
+2026-02-15 16:03:50,261 event=stream_resolver.resolve_failed channel=zightningg error=RuntimeError
+2026-02-15 16:03:50,261 event=stream_resolver.cache_miss channel=coyrhyme_
+2026-02-15 16:03:50,556 event=stream_resolver.streams duration_ms=295.35 channel=coyrhyme_
+2026-02-15 16:03:50,557 event=stream_resolver.best_missing channel=coyrhyme_
+2026-02-15 16:03:50,557 event=stream_resolver.resolve_hls_url duration_ms=295.63 channel=coyrhyme_
+2026-02-15 16:03:50,557 event=stream_resolver.resolve_failed channel=coyrhyme_ error=RuntimeError
+2026-02-15 16:03:50,557 event=stream_resolver.cache_miss channel=pillbug_09
+2026-02-15 16:03:50,763 event=stream_resolver.streams duration_ms=206.37 channel=pillbug_09
+2026-02-15 16:03:50,763 event=stream_resolver.best_missing channel=pillbug_09
+2026-02-15 16:03:50,763 event=stream_resolver.resolve_hls_url duration_ms=206.60 channel=pillbug_09
+2026-02-15 16:03:50,764 event=stream_resolver.resolve_failed channel=pillbug_09 error=RuntimeError
+2026-02-15 16:03:50,764 event=stream_resolver.cache_miss channel=aut1sm20
+2026-02-15 16:03:50,975 event=stream_resolver.streams duration_ms=210.82 channel=aut1sm20
+2026-02-15 16:03:50,975 event=stream_resolver.best_missing channel=aut1sm20
+2026-02-15 16:03:50,975 event=stream_resolver.resolve_hls_url duration_ms=211.00 channel=aut1sm20
+2026-02-15 16:03:50,975 event=stream_resolver.resolve_failed channel=aut1sm20 error=RuntimeError
+2026-02-15 16:03:50,975 event=stream_resolver.cache_miss channel=pandaendoz
+2026-02-15 16:03:51,275 event=stream_resolver.streams duration_ms=299.88 channel=pandaendoz
+2026-02-15 16:03:51,275 event=stream_resolver.best_missing channel=pandaendoz
+2026-02-15 16:03:51,275 event=stream_resolver.resolve_hls_url duration_ms=300.16 channel=pandaendoz
+2026-02-15 16:03:51,275 event=stream_resolver.resolve_failed channel=pandaendoz error=RuntimeError
+2026-02-15 16:03:51,550 event=player_window.set_streams.internal duration_ms=274.94 streams=5 focused=False created=5 reused=0 released=0
+2026-02-15 16:03:51,573 event=control_panel.refresh_list duration_ms=11.28
+2026-02-15 16:03:51,573 event=control_panel.toggle_paceman_mode duration_ms=11.92 enabled=True
+2026-02-15 16:03:51,573 event=control_panel.emit_active_streams count=63 focused=False paceman_mode=True manual_layout=True
+2026-02-15 16:03:51,599 event=control_panel.refresh_list duration_ms=25.09
+2026-02-15 16:03:51,611 event=control_panel.refresh_list duration_ms=11.18
+2026-02-15 16:03:51,611 event=control_panel.emit_active_streams count=63 focused=False paceman_mode=True manual_layout=True
+2026-02-15 16:03:51,622 event=control_panel.refresh_list duration_ms=10.89
+2026-02-15 16:03:51,633 event=control_panel.refresh_list duration_ms=11.33
+2026-02-15 16:03:51,644 event=control_panel.refresh_list duration_ms=10.86
+2026-02-15 16:03:51,656 event=control_panel.refresh_list duration_ms=11.12
+2026-02-15 16:03:51,669 event=control_panel.refresh_list duration_ms=12.74
+2026-02-15 16:03:57,543 event=control_panel.refresh_list duration_ms=17.38
+2026-02-15 16:03:57,543 event=control_panel.emit_active_streams count=1 focused=True paceman_mode=True manual_layout=False
+2026-02-15 16:03:57,544 event=stream_resolver.cache_hit channel=czelco
+2026-02-15 16:03:57,544 event=resolve_channel_urls duration_ms=0.13 count=1 focused=True request_id=1 max_quality=720
+2026-02-15 16:03:57,613 event=player_window.set_streams.internal duration_ms=57.10 streams=1 focused=True created=0 reused=1 released=4
+2026-02-15 16:03:57,613 event=player_window.set_streams duration_ms=57.24 count=1 focused=True request_id=1 manual_mode=False
+2026-02-15 16:04:03,829 event=control_panel.refresh_list duration_ms=10.85
+2026-02-15 16:04:11,579 event=control_panel.refresh_list duration_ms=10.35
+2026-02-15 16:04:13,004 event=control_panel.refresh_list duration_ms=16.30
+2026-02-15 16:04:13,663 event=control_panel.refresh_list duration_ms=17.57
+2026-02-15 16:04:13,837 event=control_panel.refresh_list duration_ms=17.07
+2026-02-15 16:04:13,983 event=control_panel.refresh_list duration_ms=16.91
+2026-02-15 16:04:15,103 event=control_panel.refresh_list duration_ms=17.74
+2026-02-15 16:04:15,538 event=control_panel.refresh_list duration_ms=18.32
+2026-02-15 16:04:16,885 event=control_panel.refresh_list duration_ms=17.99
+2026-02-15 16:04:17,421 event=control_panel.refresh_list duration_ms=17.57

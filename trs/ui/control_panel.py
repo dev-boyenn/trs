@@ -156,6 +156,7 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._pace_paceman_enabled = False
         self._pace_paceman_threshold = PACE_PACEMAN_THRESHOLD
         self._max_stream_quality = _QUALITY_STEPS[3]
+        self._focus_bell_enabled = False
         self._pace_good_splits: dict[str, float] = {}
         self._pace_progression_bonus: dict[str, float] = {}
         self._focused_channel: str | None = None
@@ -213,6 +214,8 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._refresh_button = QtWidgets.QPushButton("Refresh", self)
         self._refresh_button.clicked.connect(self._start_paceman_refresh)
         self._refresh_button.setEnabled(False)
+        self._focus_bell_toggle = QtWidgets.QCheckBox("Focus bell", self)
+        self._focus_bell_toggle.toggled.connect(self._toggle_focus_bell)
         self._clear_focus_button = QtWidgets.QPushButton("Clear focus", self)
         self._clear_focus_button.clicked.connect(self._clear_focus)
         self._clear_focus_button.setEnabled(False)
@@ -225,6 +228,7 @@ class ControlPanelWindow(QtWidgets.QWidget):
         options_flow.addWidget(self._hide_offline_toggle)
         options_flow.addWidget(self._paceman_fallback_toggle)
         options_flow.addWidget(self._refresh_button)
+        options_flow.addWidget(self._focus_bell_toggle)
         options_flow.addWidget(self._clear_focus_button)
         options_flow.addWidget(self._overlay_toggle)
         options_flow.addWidget(self._fullscreen_toggle)
@@ -531,6 +535,10 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._overlay_enabled = enabled
         self._emit_settings()
         self._emit_overlay_info()
+
+    def _toggle_focus_bell(self, enabled: bool) -> None:
+        self._focus_bell_enabled = enabled
+        self._emit_settings()
 
     def _toggle_pace_sort(self, enabled: bool) -> None:
         self._pace_sort_enabled = enabled
@@ -843,7 +851,7 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._focused_channel = best_run.channel
         self._auto_focus_active = True
         self._clear_focus_button.setEnabled(True)
-        self._bell_effect.play()
+        self._play_focus_bell()
 
     def _emit_active_streams(self) -> None:
         manual_channels = list(self._manual_streams)
@@ -942,6 +950,7 @@ class ControlPanelWindow(QtWidgets.QWidget):
                 "pace_paceman_enabled": self._pace_paceman_enabled,
                 "pace_paceman_threshold": self._pace_paceman_threshold,
                 "max_stream_quality": self._max_stream_quality,
+                "focus_bell_enabled": self._focus_bell_enabled,
                 "pace_good_splits": dict(self._pace_good_splits),
                 "pace_progression_bonus": dict(self._pace_progression_bonus),
             }
@@ -954,8 +963,11 @@ class ControlPanelWindow(QtWidgets.QWidget):
             self._focused_channel = None
             self._auto_focus_active = False
         else:
+            changed = channel != self._focused_channel
             self._focused_channel = channel
             self._auto_focus_active = auto
+            if changed:
+                self._play_focus_bell()
         self._clear_focus_button.setEnabled(self._focused_channel is not None)
         self._refresh_list()
         self._emit_active_streams()
@@ -988,6 +1000,10 @@ class ControlPanelWindow(QtWidgets.QWidget):
         )
         self._overlay_enabled = bool(settings.get("overlay_enabled", True))
         self._overlay_toggle.setChecked(self._overlay_enabled)
+        self._focus_bell_enabled = bool(
+            settings.get("focus_bell_enabled", False)
+        )
+        self._focus_bell_toggle.setChecked(self._focus_bell_enabled)
         self._hide_offline = bool(
             settings.get("paceman_hide_offline", False)
         )
@@ -1077,6 +1093,13 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._paceman_timer.stop()
         self._thread_pool.clear()
         self._thread_pool.waitForDone(500)
+
+    def _play_focus_bell(self) -> None:
+        if not self._focus_bell_enabled:
+            return
+        if self._bell_effect.source().isEmpty():
+            return
+        self._bell_effect.play()
 
     def _update_focus_label(self) -> None:
         if self._focused_channel:
