@@ -2,8 +2,13 @@ from pathlib import Path
 
 from PySide6 import QtCore, QtGui, QtMultimedia, QtWidgets
 
-from ..config import CONTROL_PANEL_TITLE, PACE_AUTOFOCUS_THRESHOLD
+from ..config import (
+    CONTROL_PANEL_TITLE,
+    PACE_AUTOFOCUS_THRESHOLD,
+    PACE_PACEMAN_THRESHOLD,
+)
 from ..paceman import PacemanRun, fetch_live_runs, set_pace_config
+from ..perf_log import log_perf, perf_timer
 
 _ICON_NAME_BY_EVENT = {
     "rsg.enter_end": "end.webp",
@@ -14,6 +19,8 @@ _ICON_NAME_BY_EVENT = {
     "rsg.enter_nether": "nether.webp",
 }
 
+_QUALITY_STEPS = [160, 360, 480, 720, 1080]
+
 
 class _PacemanWorkerSignals(QtCore.QObject):
     finished = QtCore.Signal(list)
@@ -21,13 +28,14 @@ class _PacemanWorkerSignals(QtCore.QObject):
 
 
 class _PacemanWorker(QtCore.QRunnable):
-    def __init__(self) -> None:
+    def __init__(self, event_slug: str = "") -> None:
         super().__init__()
+        self._event_slug = event_slug
         self.signals = _PacemanWorkerSignals()
 
     def run(self) -> None:
         try:
-            runs = fetch_live_runs()
+            runs = fetch_live_runs(event_slug=self._event_slug)
         except Exception as exc:
             self.signals.error.emit(str(exc))
             return
@@ -116,8 +124,10 @@ class _FlowLayout(QtWidgets.QLayout):
 
 class ControlPanelWindow(QtWidgets.QWidget):
     manual_streams_changed = QtCore.Signal(list)
-    active_streams_changed = QtCore.Signal(list, bool)
+    active_streams_changed = QtCore.Signal(list, bool, bool)
     settings_changed = QtCore.Signal(dict)
+    fullscreen_toggled = QtCore.Signal(bool)
+    overlay_info_changed = QtCore.Signal(dict, bool)
 
     def __init__(
         self,
@@ -132,12 +142,20 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._paceman_runs: list[PacemanRun] = []
         self._paceman_mode = False
         self._paceman_loading = False
+        self._pending_paceman_refresh = False
         self._include_hidden = False
         self._paceman_fallback = False
+        self._paceman_event_slug = ""
         self._hide_offline = False
+        self._manual_grid_columns = 0
+        self._manual_grid_rows = 0
+        self._overlay_enabled = True
         self._pace_sort_enabled = True
         self._pace_autofocus_enabled = True
         self._pace_autofocus_threshold = PACE_AUTOFOCUS_THRESHOLD
+        self._pace_paceman_enabled = False
+        self._pace_paceman_threshold = PACE_PACEMAN_THRESHOLD
+        self._max_stream_quality = _QUALITY_STEPS[3]
         self._pace_good_splits: dict[str, float] = {}
         self._pace_progression_bonus: dict[str, float] = {}
         self._focused_channel: str | None = None
@@ -165,6 +183,11 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._paceman_timer.timeout.connect(self._start_paceman_refresh)
         self._last_active_streams: list[str] = []
         self._last_active_focused = False
+        self._last_active_quality: int | None = None
+        self._last_manual_grid_columns: int | None = None
+        self._last_manual_grid_rows: int | None = None
+        self._last_active_manual_layout: bool | None = None
+        self._applying_settings = False
 
         layout = QtWidgets.QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -193,13 +216,43 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._clear_focus_button = QtWidgets.QPushButton("Clear focus", self)
         self._clear_focus_button.clicked.connect(self._clear_focus)
         self._clear_focus_button.setEnabled(False)
+        self._fullscreen_toggle = QtWidgets.QCheckBox("Fullscreen", self)
+        self._fullscreen_toggle.toggled.connect(self._toggle_fullscreen)
+        self._overlay_toggle = QtWidgets.QCheckBox("Show overlay", self)
+        self._overlay_toggle.toggled.connect(self._toggle_overlay)
         options_flow.addWidget(self._paceman_toggle)
         options_flow.addWidget(self._show_hidden_toggle)
         options_flow.addWidget(self._hide_offline_toggle)
         options_flow.addWidget(self._paceman_fallback_toggle)
         options_flow.addWidget(self._refresh_button)
         options_flow.addWidget(self._clear_focus_button)
+        options_flow.addWidget(self._overlay_toggle)
+        options_flow.addWidget(self._fullscreen_toggle)
         layout.addLayout(options_flow)
+
+        event_row = QtWidgets.QHBoxLayout()
+        self._paceman_event_label = QtWidgets.QLabel("Paceman event", self)
+        self._paceman_event_input = QtWidgets.QLineEdit(self)
+        self._paceman_event_input.setPlaceholderText("event-server-btrl-2")
+        self._paceman_event_input.editingFinished.connect(
+            self._update_paceman_event
+        )
+        event_row.addWidget(self._paceman_event_label)
+        event_row.addWidget(self._paceman_event_input, 1)
+        layout.addLayout(event_row)
+
+        quality_row = QtWidgets.QHBoxLayout()
+        self._quality_label = QtWidgets.QLabel("Max quality", self)
+        self._quality_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
+        self._quality_slider.setRange(0, len(_QUALITY_STEPS) - 1)
+        self._quality_slider.setSingleStep(1)
+        self._quality_slider.setPageStep(1)
+        self._quality_slider.valueChanged.connect(self._update_quality)
+        self._quality_value = QtWidgets.QLabel("", self)
+        quality_row.addWidget(self._quality_label)
+        quality_row.addWidget(self._quality_slider, 1)
+        quality_row.addWidget(self._quality_value)
+        layout.addLayout(quality_row)
 
         self._status_label = QtWidgets.QLabel("", self)
         self._status_label.setWordWrap(True)
@@ -215,6 +268,7 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._paceman_tab = QtWidgets.QWidget(self._tabs)
         self._tabs.addTab(self._paceman_tab, "Paceman")
         self._tabs.addTab(self._manual_tab, "Manual")
+        self._tabs.currentChanged.connect(self._on_tab_changed)
         layout.addWidget(self._tabs, 1)
         self._tabs.setCurrentWidget(self._manual_tab)
         self._tabs.setTabEnabled(
@@ -232,6 +286,34 @@ class ControlPanelWindow(QtWidgets.QWidget):
         form_row.addWidget(self._input)
         form_row.addWidget(self._add_button)
         manual_layout.addLayout(form_row)
+
+        manual_grid_row = QtWidgets.QHBoxLayout()
+        self._manual_cols_label = QtWidgets.QLabel("Columns", self._manual_tab)
+        self._manual_cols_input = QtWidgets.QSpinBox(self._manual_tab)
+        self._manual_cols_input.setRange(0, 8)
+        self._manual_cols_input.setSpecialValueText("Auto")
+        self._manual_cols_input.valueChanged.connect(
+            self._update_manual_grid_limits
+        )
+        self._manual_cols_input.editingFinished.connect(
+            self._update_manual_grid_limits
+        )
+        self._manual_rows_label = QtWidgets.QLabel("Rows", self._manual_tab)
+        self._manual_rows_input = QtWidgets.QSpinBox(self._manual_tab)
+        self._manual_rows_input.setRange(0, 8)
+        self._manual_rows_input.setSpecialValueText("Auto")
+        self._manual_rows_input.valueChanged.connect(
+            self._update_manual_grid_limits
+        )
+        self._manual_rows_input.editingFinished.connect(
+            self._update_manual_grid_limits
+        )
+        manual_grid_row.addWidget(self._manual_cols_label)
+        manual_grid_row.addWidget(self._manual_cols_input)
+        manual_grid_row.addWidget(self._manual_rows_label)
+        manual_grid_row.addWidget(self._manual_rows_input)
+        manual_grid_row.addStretch(1)
+        manual_layout.addLayout(manual_grid_row)
 
         self._manual_list = QtWidgets.QListWidget(self._manual_tab)
         manual_layout.addWidget(self._manual_list, 1)
@@ -262,6 +344,24 @@ class ControlPanelWindow(QtWidgets.QWidget):
         pace_controls.addWidget(self._pace_threshold_input)
         pace_controls.addStretch(1)
         paceman_layout.addLayout(pace_controls)
+        paceman_gate_controls = QtWidgets.QHBoxLayout()
+        self._pace_paceman_toggle = QtWidgets.QCheckBox(
+            "Auto-enable paceman pace <=", self
+        )
+        self._pace_paceman_toggle.toggled.connect(
+            self._toggle_pace_paceman
+        )
+        self._pace_paceman_threshold_input = QtWidgets.QDoubleSpinBox(self)
+        self._pace_paceman_threshold_input.setDecimals(2)
+        self._pace_paceman_threshold_input.setSingleStep(0.05)
+        self._pace_paceman_threshold_input.setRange(-1.0, 10.0)
+        self._pace_paceman_threshold_input.valueChanged.connect(
+            self._update_pace_paceman_threshold
+        )
+        paceman_gate_controls.addWidget(self._pace_paceman_toggle)
+        paceman_gate_controls.addWidget(self._pace_paceman_threshold_input)
+        paceman_gate_controls.addStretch(1)
+        paceman_layout.addLayout(paceman_gate_controls)
         self._paceman_table = QtWidgets.QTableWidget(self._paceman_tab)
         self._paceman_table.setColumnCount(8)
         self._paceman_table.setHorizontalHeaderLabels(
@@ -300,41 +400,62 @@ class ControlPanelWindow(QtWidgets.QWidget):
         paceman_layout.addWidget(self._paceman_table, 1)
         self._apply_settings(settings)
         self._refresh_list()
+        QtCore.QTimer.singleShot(0, self._emit_overlay_info)
 
     def _toggle_paceman_mode(self, enabled: bool) -> None:
-        self._paceman_mode = enabled
-        self._tabs.setTabEnabled(
-            self._tabs.indexOf(self._paceman_tab), enabled
-        )
-        self._tabs.setCurrentWidget(
-            self._paceman_tab if enabled else self._manual_tab
-        )
-        self._show_hidden_toggle.setEnabled(enabled)
-        self._hide_offline_toggle.setEnabled(enabled)
-        self._paceman_fallback_toggle.setEnabled(enabled)
-        self._refresh_button.setEnabled(enabled and not self._paceman_loading)
-        self._clear_focus_button.setEnabled(self._focused_channel is not None)
-        self._pace_sort_toggle.setEnabled(enabled)
-        self._pace_autofocus_toggle.setEnabled(enabled)
-        self._pace_threshold_input.setEnabled(
-            enabled and self._pace_autofocus_enabled
-        )
-        self._emit_settings()
-        if enabled:
-            self._status_label.setText("Fetching live runs...")
-            self._start_paceman_refresh()
-            self._paceman_timer.start()
-        else:
-            self._status_label.setText("")
-            self._paceman_timer.stop()
-            if self._focused_channel not in self._manual_streams:
-                self._focused_channel = None
+        with perf_timer("control_panel.toggle_paceman_mode", enabled=enabled):
+            self._paceman_mode = enabled
+            self._tabs.setTabEnabled(
+                self._tabs.indexOf(self._paceman_tab), enabled
+            )
+            self._tabs.setCurrentWidget(
+                self._paceman_tab if enabled else self._manual_tab
+            )
+            self._show_hidden_toggle.setEnabled(enabled)
+            self._hide_offline_toggle.setEnabled(enabled)
+            self._paceman_fallback_toggle.setEnabled(enabled)
+            self._refresh_button.setEnabled(enabled and not self._paceman_loading)
             self._clear_focus_button.setEnabled(self._focused_channel is not None)
-            self._update_focus_label()
-            self._refresh_list()
-            self.active_streams_changed.emit(list(self._manual_streams), False)
-            self._last_active_streams = list(self._manual_streams)
-            self._last_active_focused = False
+            self._pace_sort_toggle.setEnabled(enabled)
+            self._pace_autofocus_toggle.setEnabled(enabled)
+            self._pace_paceman_toggle.setEnabled(enabled)
+            self._pace_threshold_input.setEnabled(
+                enabled and self._pace_autofocus_enabled
+            )
+            self._pace_paceman_threshold_input.setEnabled(
+                enabled and self._pace_paceman_enabled
+            )
+            self._emit_settings()
+            if enabled:
+                self._status_label.setText("Fetching live runs...")
+                self._start_paceman_refresh()
+                self._paceman_timer.start()
+            else:
+                self._status_label.setText("")
+                self._paceman_timer.stop()
+                if self._focused_channel not in self._manual_streams:
+                    self._focused_channel = None
+                self._clear_focus_button.setEnabled(
+                    self._focused_channel is not None
+                )
+                self._update_focus_label()
+                self._refresh_list()
+                manual_channels = list(self._manual_streams)
+                self.active_streams_changed.emit(
+                    manual_channels, False, True
+                )
+                self._last_active_streams = list(manual_channels)
+                self._last_active_focused = False
+                self._last_active_quality = self._max_stream_quality
+                self._last_active_manual_layout = True
+
+    def _on_tab_changed(self, _index: int) -> None:
+        if not self._paceman_mode:
+            return
+        self._refresh_list()
+
+    def is_manual_source_active(self) -> bool:
+        return not self._paceman_mode
 
     def _toggle_show_hidden(self, enabled: bool) -> None:
         self._include_hidden = enabled
@@ -355,6 +476,61 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._emit_settings()
         if self._paceman_mode:
             self._emit_active_streams()
+
+    def _update_manual_grid_limits(self, _value: int = 0) -> None:
+        self._manual_cols_input.interpretText()
+        self._manual_rows_input.interpretText()
+        previous_cols, previous_rows = (
+            self._manual_grid_columns,
+            self._manual_grid_rows,
+        )
+        self._manual_grid_columns = int(self._manual_cols_input.value())
+        self._manual_grid_rows = int(self._manual_rows_input.value())
+        if self._applying_settings:
+            return
+        self._emit_settings()
+        if (
+            self.is_manual_source_active()
+            and (
+                self._manual_grid_columns != previous_cols
+                or self._manual_grid_rows != previous_rows
+            )
+        ):
+            self.force_refresh_active_streams()
+
+    def _current_manual_grid_limits(self) -> tuple[int, int]:
+        cols = int(self._manual_cols_input.value())
+        rows = int(self._manual_rows_input.value())
+        return max(0, cols), max(0, rows)
+
+    def manual_grid_limits(self) -> tuple[int, int]:
+        return self._current_manual_grid_limits()
+
+    def force_refresh_active_streams(self) -> None:
+        self._last_active_streams = []
+        self._last_active_focused = False
+        self._last_active_quality = None
+        self._last_manual_grid_columns = None
+        self._last_manual_grid_rows = None
+        self._last_active_manual_layout = None
+        self._emit_active_streams()
+
+    def _update_paceman_event(self) -> None:
+        event_slug = self._paceman_event_input.text().strip()
+        if event_slug == self._paceman_event_slug:
+            return
+        self._paceman_event_slug = event_slug
+        self._emit_settings()
+        if self._paceman_mode:
+            self._start_paceman_refresh()
+
+    def _toggle_fullscreen(self, enabled: bool) -> None:
+        self.fullscreen_toggled.emit(enabled)
+
+    def _toggle_overlay(self, enabled: bool) -> None:
+        self._overlay_enabled = enabled
+        self._emit_settings()
+        self._emit_overlay_info()
 
     def _toggle_pace_sort(self, enabled: bool) -> None:
         self._pace_sort_enabled = enabled
@@ -380,13 +556,39 @@ class ControlPanelWindow(QtWidgets.QWidget):
             self._refresh_list()
             self._emit_active_streams()
 
+    def _toggle_pace_paceman(self, enabled: bool) -> None:
+        self._pace_paceman_enabled = enabled
+        self._pace_paceman_threshold_input.setEnabled(
+            self._paceman_mode and enabled
+        )
+        self._emit_settings()
+        if self._paceman_mode:
+            self._refresh_list()
+            self._emit_active_streams()
+
+    def _update_pace_paceman_threshold(self, value: float) -> None:
+        self._pace_paceman_threshold = float(value)
+        self._emit_settings()
+        if self._paceman_mode:
+            self._refresh_list()
+            self._emit_active_streams()
+
+    def _update_quality(self, slider_value: int) -> None:
+        index = max(0, min(slider_value, len(_QUALITY_STEPS) - 1))
+        self._max_stream_quality = _QUALITY_STEPS[index]
+        self._quality_value.setText(f"{self._max_stream_quality}p")
+        self._emit_settings()
+        self._emit_active_streams()
+
     def _start_paceman_refresh(self) -> None:
         if self._paceman_loading:
+            self._pending_paceman_refresh = True
             return
+        self._pending_paceman_refresh = False
         self._paceman_loading = True
         self._refresh_button.setEnabled(False)
         self._status_label.setText("Fetching live runs...")
-        worker = _PacemanWorker()
+        worker = _PacemanWorker(self._paceman_event_slug)
         worker.signals.finished.connect(self._on_paceman_runs)
         worker.signals.error.connect(self._on_paceman_error)
         self._current_worker = worker
@@ -398,9 +600,17 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._refresh_button.setEnabled(self._paceman_mode)
         self._paceman_runs = runs
         if self._paceman_mode:
-            self._status_label.setText(f"Loaded {len(runs)} live runs.")
+            if self._paceman_event_slug:
+                self._status_label.setText(
+                    f"Loaded {len(runs)} live runs for "
+                    f"'{self._paceman_event_slug}'."
+                )
+            else:
+                self._status_label.setText(f"Loaded {len(runs)} live runs.")
             self._refresh_list()
             self._emit_active_streams()
+            if self._pending_paceman_refresh:
+                self._start_paceman_refresh()
 
     def _on_paceman_error(self, message: str) -> None:
         self._paceman_loading = False
@@ -408,6 +618,8 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._refresh_button.setEnabled(self._paceman_mode)
         if self._paceman_mode:
             self._status_label.setText(f"Paceman refresh failed: {message}")
+            if self._pending_paceman_refresh:
+                self._start_paceman_refresh()
 
     def _add_stream(self) -> None:
         channel = self._input.text().strip()
@@ -434,11 +646,13 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._emit_active_streams()
 
     def _refresh_list(self) -> None:
-        self._manual_list.clear()
-        self._paceman_table.setRowCount(0)
-        self._refresh_paceman_list()
-        self._refresh_manual_list()
-        self._update_focus_label()
+        with perf_timer("control_panel.refresh_list"):
+            self._manual_list.clear()
+            self._paceman_table.setRowCount(0)
+            self._refresh_paceman_list()
+            self._refresh_manual_list()
+            self._update_focus_label()
+            self._emit_overlay_info()
 
     def _refresh_manual_list(self) -> None:
         for channel in self._manual_streams:
@@ -551,11 +765,63 @@ class ControlPanelWindow(QtWidgets.QWidget):
 
         return sorted(visible_runs, key=pace_key)
 
+    def _pace_gate_met(self, visible_runs: list[PacemanRun]) -> bool:
+        if not self._pace_paceman_enabled:
+            return True
+        return any(
+            run.channel
+            and run.pace_score is not None
+            and run.pace_score <= self._pace_paceman_threshold
+            for run in visible_runs
+        )
+
+    @staticmethod
+    def _channel_key(channel: str | None) -> str:
+        if not channel:
+            return ""
+        return str(channel).strip().lower()
+
+    def _find_channel_match(
+        self,
+        target_channel: str | None,
+        channels: list[str],
+    ) -> str | None:
+        target_key = self._channel_key(target_channel)
+        if not target_key:
+            return None
+        for channel in channels:
+            if self._channel_key(channel) == target_key:
+                return channel
+        return None
+
+    def _apply_focus_order(
+        self,
+        channels: list[str],
+    ) -> tuple[list[str], bool]:
+        ordered = list(channels)
+        matched_focus = self._find_channel_match(
+            self._focused_channel,
+            ordered,
+        )
+        if not matched_focus:
+            return ordered, False
+        ordered.remove(matched_focus)
+        ordered.insert(0, matched_focus)
+        return ordered, True
+
     def _maybe_auto_focus(self, visible_runs: list[PacemanRun]) -> None:
         if not self._paceman_mode or not self._pace_autofocus_enabled:
             return
-        if self._focused_channel is not None and not self._auto_focus_active:
+        if not self._pace_gate_met(visible_runs):
             return
+        if self._focused_channel is not None and not self._auto_focus_active:
+            visible_channels = {
+                self._channel_key(run.channel)
+                for run in visible_runs
+                if run.channel
+            }
+            if self._channel_key(self._focused_channel) in visible_channels:
+                return
         candidates = [
             run
             for run in visible_runs
@@ -580,45 +846,102 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._bell_effect.play()
 
     def _emit_active_streams(self) -> None:
-        if not self._paceman_mode:
-            channels = list(self._manual_streams)
-            if self._focused_channel in channels:
-                channels.remove(self._focused_channel)
-                channels.insert(0, self._focused_channel)
-                focused = True
-            else:
-                focused = False
+        manual_channels = list(self._manual_streams)
+        paceman_channels: list[str] = []
+        manual_layout = self.is_manual_source_active()
+
+        if manual_layout:
+            channels = list(manual_channels)
         else:
             visible_runs = self._sorted_paceman_runs()
-            channels = [run.channel for run in visible_runs if run.channel]
-            if not channels and self._paceman_fallback:
-                channels = list(self._manual_streams)
-                focused = False
-            elif self._focused_channel in channels:
-                channels.remove(self._focused_channel)
-                channels.insert(0, self._focused_channel)
-                focused = True
+            paceman_channels = [
+                run.channel for run in visible_runs if run.channel
+            ]
+            pace_gate_met = self._pace_gate_met(visible_runs)
+            if pace_gate_met:
+                if paceman_channels:
+                    channels = list(paceman_channels)
+                    manual_layout = False
+                elif self._paceman_fallback:
+                    channels = list(manual_channels)
+                    manual_layout = True
+                else:
+                    channels = []
+                    manual_layout = False
             else:
-                focused = False
+                channels = list(manual_channels)
+                manual_layout = True
+                # Focus should still take priority over fallback source.
+                if self._find_channel_match(
+                    self._focused_channel,
+                    paceman_channels,
+                ):
+                    channels = list(paceman_channels)
+                    manual_layout = False
+
+        channels, focused = self._apply_focus_order(channels)
+
+        if self._paceman_mode and not focused:
+            alternate_channels = (
+                paceman_channels if manual_layout else manual_channels
+            )
+            reordered_alternate, alternate_focused = self._apply_focus_order(
+                alternate_channels
+            )
+            if alternate_focused:
+                channels = reordered_alternate
+                focused = True
+                manual_layout = not manual_layout
+
         if (
             channels == self._last_active_streams
             and focused == self._last_active_focused
+            and self._last_active_quality == self._max_stream_quality
+            and self._last_manual_grid_columns
+            == self._current_manual_grid_limits()[0]
+            and self._last_manual_grid_rows
+            == self._current_manual_grid_limits()[1]
+            and self._last_active_manual_layout == manual_layout
         ):
             return
+        manual_cols, manual_rows = self._current_manual_grid_limits()
         self._last_active_streams = list(channels)
         self._last_active_focused = focused
-        self.active_streams_changed.emit(channels, focused)
+        self._last_active_quality = self._max_stream_quality
+        self._last_manual_grid_columns = manual_cols
+        self._last_manual_grid_rows = manual_rows
+        self._last_active_manual_layout = manual_layout
+        self.active_streams_changed.emit(channels, focused, manual_layout)
+        log_perf(
+            "control_panel.emit_active_streams",
+            count=len(channels),
+            focused=focused,
+            paceman_mode=self._paceman_mode,
+            manual_layout=manual_layout,
+        )
 
     def _emit_settings(self) -> None:
+        if self._applying_settings:
+            return
+        manual_cols, manual_rows = self._current_manual_grid_limits()
+        self._manual_grid_columns = manual_cols
+        self._manual_grid_rows = manual_rows
         self.settings_changed.emit(
             {
                 "paceman_mode": self._paceman_mode,
                 "include_hidden": self._include_hidden,
                 "paceman_fallback": self._paceman_fallback,
+                "paceman_event": self._paceman_event_slug,
                 "paceman_hide_offline": self._hide_offline,
+                "manual_grid_columns": manual_cols,
+                "manual_grid_rows": manual_rows,
+                "overlay_enabled": self._overlay_enabled,
                 "pace_sort_enabled": self._pace_sort_enabled,
                 "pace_autofocus_enabled": self._pace_autofocus_enabled,
                 "pace_autofocus_threshold": self._pace_autofocus_threshold,
+                "pace_paceman_enabled": self._pace_paceman_enabled,
+                "pace_paceman_threshold": self._pace_paceman_threshold,
+                "max_stream_quality": self._max_stream_quality,
                 "pace_good_splits": dict(self._pace_good_splits),
                 "pace_progression_bonus": dict(self._pace_progression_bonus),
             }
@@ -647,6 +970,13 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._emit_active_streams()
 
     def _apply_settings(self, settings: dict[str, object]) -> None:
+        self._applying_settings = True
+        event_setting = settings.get("paceman_event", "")
+        if event_setting is None:
+            self._paceman_event_slug = ""
+        else:
+            self._paceman_event_slug = str(event_setting).strip()
+        self._paceman_event_input.setText(self._paceman_event_slug)
         self._paceman_toggle.setChecked(
             bool(settings.get("paceman_mode", False))
         )
@@ -656,10 +986,32 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._paceman_fallback_toggle.setChecked(
             bool(settings.get("paceman_fallback", False))
         )
+        self._overlay_enabled = bool(settings.get("overlay_enabled", True))
+        self._overlay_toggle.setChecked(self._overlay_enabled)
         self._hide_offline = bool(
             settings.get("paceman_hide_offline", False)
         )
         self._hide_offline_toggle.setChecked(self._hide_offline)
+        try:
+            manual_columns = max(
+                0, int(settings.get("manual_grid_columns", 0))
+            )
+        except (TypeError, ValueError):
+            manual_columns = 0
+        try:
+            manual_rows = max(
+                0, int(settings.get("manual_grid_rows", 0))
+            )
+        except (TypeError, ValueError):
+            manual_rows = 0
+        cols_blocker = QtCore.QSignalBlocker(self._manual_cols_input)
+        rows_blocker = QtCore.QSignalBlocker(self._manual_rows_input)
+        self._manual_cols_input.setValue(manual_columns)
+        self._manual_rows_input.setValue(manual_rows)
+        del cols_blocker
+        del rows_blocker
+        self._manual_grid_columns = manual_columns
+        self._manual_grid_rows = manual_rows
         self._pace_sort_enabled = bool(settings.get("pace_sort_enabled", True))
         self._pace_sort_toggle.setChecked(self._pace_sort_enabled)
         self._pace_autofocus_enabled = bool(
@@ -675,6 +1027,31 @@ class ControlPanelWindow(QtWidgets.QWidget):
         self._pace_threshold_input.setEnabled(
             self._paceman_mode and self._pace_autofocus_enabled
         )
+        self._pace_paceman_enabled = bool(
+            settings.get("pace_paceman_enabled", False)
+        )
+        self._pace_paceman_toggle.setChecked(self._pace_paceman_enabled)
+        self._pace_paceman_threshold = float(
+            settings.get("pace_paceman_threshold", PACE_PACEMAN_THRESHOLD)
+        )
+        self._pace_paceman_threshold_input.setValue(
+            self._pace_paceman_threshold
+        )
+        self._pace_paceman_threshold_input.setEnabled(
+            self._paceman_mode and self._pace_paceman_enabled
+        )
+        quality_setting = settings.get("max_stream_quality", _QUALITY_STEPS[3])
+        try:
+            quality_value = int(quality_setting)
+        except (TypeError, ValueError):
+            quality_value = _QUALITY_STEPS[3]
+        if quality_value not in _QUALITY_STEPS:
+            quality_value = min(
+                _QUALITY_STEPS, key=lambda step: abs(step - quality_value)
+            )
+        self._max_stream_quality = quality_value
+        self._quality_slider.setValue(_QUALITY_STEPS.index(quality_value))
+        self._quality_value.setText(f"{quality_value}p")
         good_splits = settings.get("pace_good_splits")
         if isinstance(good_splits, dict):
             self._pace_good_splits = {
@@ -694,6 +1071,7 @@ class ControlPanelWindow(QtWidgets.QWidget):
                 good_splits_sec=self._pace_good_splits,
                 progression_bonus=self._pace_progression_bonus,
             )
+        self._applying_settings = False
 
     def shutdown(self) -> None:
         self._paceman_timer.stop()
@@ -705,6 +1083,93 @@ class ControlPanelWindow(QtWidgets.QWidget):
             self._focus_label.setText(f"Focused: {self._focused_channel}")
         else:
             self._focus_label.setText("Focused: none")
+
+    def _emit_overlay_info(self) -> None:
+        info: dict[str, dict[str, str | None]] = {}
+        manual_channels = list(self._manual_streams)
+        if self.is_manual_source_active():
+            for channel in manual_channels:
+                if not channel:
+                    continue
+                info[channel] = {
+                    "runner": channel,
+                    "split_time": "",
+                    "pb_time": "",
+                    "icon_name": None,
+                }
+        else:
+            visible_runs = self._sorted_paceman_runs()
+            visible_channels = [run.channel for run in visible_runs if run.channel]
+            if not self._pace_gate_met(visible_runs):
+                if (
+                    self._find_channel_match(
+                        self._focused_channel,
+                        visible_channels,
+                    )
+                ):
+                    for run in visible_runs:
+                        if not run.channel:
+                            continue
+                        name = run.nickname or run.channel or "unknown runner"
+                        split_time = self._format_event_time(run)
+                        pb_time = self._format_pb_time(run) or "--:--"
+                        event_id = getattr(run, "last_event_id", None)
+                        icon_name = (
+                            _ICON_NAME_BY_EVENT.get(event_id)
+                            if isinstance(event_id, str)
+                            else None
+                        )
+                        info[run.channel] = {
+                            "runner": name,
+                            "split_time": split_time,
+                            "pb_time": pb_time,
+                            "icon_name": icon_name,
+                        }
+                    self.overlay_info_changed.emit(info, self._overlay_enabled)
+                    return
+                for channel in manual_channels:
+                    if not channel:
+                        continue
+                    info[channel] = {
+                        "runner": channel,
+                        "split_time": "",
+                        "pb_time": "",
+                        "icon_name": None,
+                    }
+                self.overlay_info_changed.emit(info, self._overlay_enabled)
+                return
+            visible_channels = [run.channel for run in visible_runs if run.channel]
+            if not visible_channels and self._paceman_fallback:
+                for channel in manual_channels:
+                    if not channel:
+                        continue
+                    info[channel] = {
+                        "runner": channel,
+                        "split_time": "",
+                        "pb_time": "",
+                        "icon_name": None,
+                    }
+                self.overlay_info_changed.emit(info, self._overlay_enabled)
+                return
+            for run in visible_runs:
+                if not run.channel:
+                    continue
+                name = run.nickname or run.channel or "unknown runner"
+                split_time = self._format_event_time(run)
+                pb_time = self._format_pb_time(run) or "--:--"
+                event_id = getattr(run, "last_event_id", None)
+                icon_name = (
+                    _ICON_NAME_BY_EVENT.get(event_id)
+                    if isinstance(event_id, str)
+                    else None
+                )
+                info[run.channel] = {
+                    "runner": name,
+                    "split_time": split_time,
+                    "pb_time": pb_time,
+                    "icon_name": icon_name,
+                }
+        self.overlay_info_changed.emit(info, self._overlay_enabled)
 
     def _icon_for_run(self, run: PacemanRun) -> QtGui.QPixmap | None:
         event_id = getattr(run, "last_event_id", None)

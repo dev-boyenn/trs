@@ -2,6 +2,8 @@ from pathlib import Path
 
 TOKEN_ENV_VAR = "TWITCH_OAUTH_TOKEN"
 DEFAULT_SAVE_FILE = Path("save.json")
+PERF_LOG_FILE = Path("perf.log")
 APP_TITLE = "TRS"
 CONTROL_PANEL_TITLE = "TRS Control Panel"
 PACE_AUTOFOCUS_THRESHOLD = 0.6
+PACE_PACEMAN_THRESHOLD = 0.8

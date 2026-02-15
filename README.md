@@ -31,6 +31,10 @@ python main.py
 The app starts with the player window plus a control panel. Use the control
 panel to add/remove streams and toggle Paceman settings. Streams and settings
 are saved in `save.json`, so the next launch restores them.
+In Manual mode you can set `Columns` and `Rows` to cap the grid size
+(`Auto` means no explicit limit for that dimension).
+If you set `Paceman event` (for example `event-server-btrl-2`), Paceman mode
+only shows runners whitelisted for that event.
 
 The player shows all streams side by side (audio is enabled for the first one).
 

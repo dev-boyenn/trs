@@ -4,9 +4,12 @@ import urllib.request
 from dataclasses import dataclass
 
 PACEMAN_LIVE_URL = "https://paceman.gg/api/ars/liveruns"
+PACEMAN_EVENTS_URL = "https://paceman.gg/api/get-events"
 PACEMAN_PB_URL = "https://twitchgoat-a5vk.vercel.app/paceman/pb?username="
 _PB_CACHE_TTL_SEC = 1800
+_EVENTS_CACHE_TTL_SEC = 60
 _pb_cache: dict[str, tuple[float, float | None]] = {}
+_events_cache: tuple[float, list[dict]] | None = None
 
 
 @dataclass(frozen=True)
@@ -79,6 +82,7 @@ def _event_time_ms(event: dict) -> int | None:
 def _fetch_pb_seconds(username: str, timeout: float = 4.0) -> float | None:
     if not username:
         return None
+    _prune_pb_cache()
     cached = _pb_cache.get(username)
     now = time.time()
     if cached and (now - cached[0]) < _PB_CACHE_TTL_SEC:
@@ -100,6 +104,79 @@ def _fetch_pb_seconds(username: str, timeout: float = 4.0) -> float | None:
         pb_seconds = None
     _pb_cache[username] = (now, pb_seconds)
     return pb_seconds
+
+
+def _prune_pb_cache(now: float | None = None) -> None:
+    now = time.time() if now is None else now
+    expired: list[str] = []
+    for name, (timestamp, _) in _pb_cache.items():
+        if now - timestamp > _PB_CACHE_TTL_SEC:
+            expired.append(name)
+    for name in expired:
+        _pb_cache.pop(name, None)
+
+
+def _normalize_event_slug(event: str | None) -> str:
+    if not event:
+        return ""
+    slug = str(event).strip()
+    if not slug:
+        return ""
+    marker = "/events/"
+    if marker in slug:
+        slug = slug.split(marker, 1)[1]
+    slug = slug.split("?", 1)[0].split("#", 1)[0].strip("/")
+    return slug.lower()
+
+
+def _fetch_events(timeout: float = 8.0) -> list[dict]:
+    global _events_cache
+    now = time.time()
+    if _events_cache and (now - _events_cache[0]) < _EVENTS_CACHE_TTL_SEC:
+        return _events_cache[1]
+    request = urllib.request.Request(
+        PACEMAN_EVENTS_URL,
+        headers={"User-Agent": "trs"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception:
+        if _events_cache:
+            return _events_cache[1]
+        raise
+    if not isinstance(payload, list):
+        _events_cache = (now, [])
+        return []
+    events = [entry for entry in payload if isinstance(entry, dict)]
+    _events_cache = (now, events)
+    return events
+
+
+def _event_whitelist_for_slug(
+    event_slug: str,
+    timeout: float = 8.0,
+) -> set[str]:
+    normalized_slug = _normalize_event_slug(event_slug)
+    if not normalized_slug:
+        return set()
+    events = _fetch_events(timeout=timeout)
+    matching_event: dict | None = None
+    for event in events:
+        vanity = event.get("vanity")
+        if isinstance(vanity, str) and vanity.lower() == normalized_slug:
+            matching_event = event
+            break
+    if not matching_event:
+        return set()
+    whitelist = matching_event.get("whitelist")
+    if not isinstance(whitelist, list):
+        return set()
+    return {
+        str(entry).strip().lower()
+        for entry in whitelist
+        if str(entry).strip()
+    }
 
 
 def _find_event_time(event_list: list[dict], event_id: str) -> int | None:
@@ -202,7 +279,17 @@ def set_pace_config(
             _progression_bonus.update(normalized)
 
 
-def fetch_live_runs(timeout: float = 8.0) -> list[PacemanRun]:
+def fetch_live_runs(
+    timeout: float = 8.0,
+    event_slug: str | None = None,
+) -> list[PacemanRun]:
+    allowed_uuids: set[str] | None = None
+    normalized_event_slug = _normalize_event_slug(event_slug)
+    if normalized_event_slug:
+        allowed_uuids = _event_whitelist_for_slug(
+            normalized_event_slug,
+            timeout=timeout,
+        )
     request = urllib.request.Request(
         PACEMAN_LIVE_URL,
         headers={"User-Agent": "trs"},
@@ -216,6 +303,13 @@ def fetch_live_runs(timeout: float = 8.0) -> list[PacemanRun]:
         if not isinstance(entry, dict):
             continue
         user = entry.get("user") or {}
+        if allowed_uuids is not None:
+            user_uuid = user.get("uuid")
+            if (
+                not isinstance(user_uuid, str)
+                or user_uuid.strip().lower() not in allowed_uuids
+            ):
+                continue
         channel = user.get("liveAccount")
         nickname = str(entry.get("nickname") or "").strip()
         last_event_id = None

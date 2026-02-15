@@ -7,10 +7,17 @@ _DEFAULT_SETTINGS: dict[str, object] = {
     "paceman_mode": False,
     "include_hidden": False,
     "paceman_fallback": False,
+    "paceman_event": "",
     "paceman_hide_offline": False,
+    "manual_grid_columns": 0,
+    "manual_grid_rows": 0,
+    "overlay_enabled": True,
     "pace_sort_enabled": True,
     "pace_autofocus_enabled": True,
     "pace_autofocus_threshold": 0.6,
+    "pace_paceman_enabled": False,
+    "pace_paceman_threshold": 0.8,
+    "max_stream_quality": 720,
     "pace_good_splits": {
         "NETHER": 90,
         "S1": 120,
@@ -36,13 +43,19 @@ _BOOL_KEYS = {
     "include_hidden",
     "paceman_fallback",
     "paceman_hide_offline",
+    "overlay_enabled",
     "pace_sort_enabled",
     "pace_autofocus_enabled",
+    "pace_paceman_enabled",
 }
 
-_FLOAT_KEYS = {"pace_autofocus_threshold"}
+_FLOAT_KEYS = {"pace_autofocus_threshold", "pace_paceman_threshold"}
+
+_INT_KEYS = {"max_stream_quality", "manual_grid_columns", "manual_grid_rows"}
 
 _DICT_FLOAT_KEYS = {"pace_good_splits", "pace_progression_bonus"}
+
+_STRING_KEYS = {"paceman_event"}
 
 
 def _normalize_settings(settings: dict) -> dict[str, object]:
@@ -56,6 +69,18 @@ def _normalize_settings(settings: dict) -> dict[str, object]:
             normalized[key] = float(value)
         except (TypeError, ValueError):
             normalized[key] = float(_DEFAULT_SETTINGS[key])
+    for key in _INT_KEYS:
+        value = settings.get(key, normalized[key])
+        try:
+            normalized[key] = max(0, int(value))
+        except (TypeError, ValueError):
+            normalized[key] = max(0, int(_DEFAULT_SETTINGS[key]))
+    for key in _STRING_KEYS:
+        value = settings.get(key, normalized[key])
+        if value is None:
+            normalized[key] = ""
+        else:
+            normalized[key] = str(value).strip()
     for key in _DICT_FLOAT_KEYS:
         default_map = _DEFAULT_SETTINGS[key]
         value = settings.get(key, default_map)
